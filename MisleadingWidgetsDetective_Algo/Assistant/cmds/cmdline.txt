@@ -1,0 +1,33 @@
+#尝试kpca降维到700,300,150的效果对比
+A o HTML3kpcaExampleProject
+######################### DP
+# 已经提前处理过
+
+A s spm_kpca700_optics
+######################### DT
+DT apktree csvsets
+
+######################### IF
+#IF extif spm
+IF usedefault
+
+######################### DE
+DE vector
+
+DE cutdim kpca,700
+######################### VC
+VC run
+#VC eval
+######################### OD
+OD run
+#OD eval
+
+A s spm_kpca300_optics
+DE cutdim kpca,300
+######################### VC
+VC run
+#VC eval
+######################### OD
+OD run
+#OD eval
+    

@@ -1,0 +1,40 @@
+#尝试tsne降维到700,300,150的效果对比
+A o MW_tsne
+######################### DP
+# 已经提前处理过
+
+A sub hog_tsne300_optics
+######################### DT
+#DT apktree csvsets
+
+######################### IF
+IF extif hog
+
+######################### DE
+DE vector  
+
+DE cutdim tsne,300
+######################### VC
+VC run
+#VC eval
+######################### OD
+OD run
+#OD eval
+
+A sub hog_tsne150_optics
+DE cutdim tsne,150
+######################### VC
+VC run
+#VC eval
+######################### OD
+OD run
+#OD eval
+
+A sub hog_tsne70_optics
+DE cutdim tsne,70
+######################### VC
+VC run
+VC eval
+######################### OD
+OD run
+OD eval

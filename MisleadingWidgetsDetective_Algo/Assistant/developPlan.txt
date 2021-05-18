@@ -1,0 +1,37 @@
+Web页面
+[X]捕捉键盘动作=>回车搜索，n下一个m上一个
+[X]可以下载coverlist
+[X]在tag界面直接标出目前已经检出的控件(绿色)
+[X]在tag界面中标出当前推荐为异常的控件(黄色)
+[--]相同控件的按钮颜色一致
+[]要将所有控件相同的部分变为红色(或者少一个两个没问题)
+
+Web过滤(最好可以设置)
+=>首先将原簇号加在之前的cover列表上
+=>再开发即可
+[X]过滤>3个的，可以用层级关系，<3个的收纳起来
+[X]计算纯度，不能一个app占太多
+
+UIWidget
+[]doc特征中去除多余？？
+[]取出无用的api
+[]目前的doc使用了第三方的api ？去除！！
+
+Data Expand
+[X]check what data can
+[O]develop mark picture demo in single .py
+  [--]Way 1:当检测raw数据集时，如果发现有text，立即进行cut text操作，然后符合cut text的计入数据库， 不符合cut text才输入trash data
+  [O]Way 2:检查raw数据集后，先不处理有文字的，将其放在trashdata，然后再检查trashdata，经过聚类人工 筛选后，根据原数据集的文件列表(hash_text)，放回到指定位置
+         - 新定义一个操作为 回收text垃圾
+         - 构建一个新的数据集，然再将垃圾放入
+         - 首先构建trashdata的目录数组
+         - 再遍历原目录，如果名字再trashdata目录中，记录在dict中以备使用
+         - 遍历目录数组，，开始检查每个图片
+         - 创建函数，去除文字：调用函数获取图片背景，，然后使用背景填充
+
+
+  []Way 1: calc the total bg, fill bg color 
+  []Way 2: if text in the lower part , no other things , cut it
+  []Way 3: calc the text perent , pick the block near the text , fill with bg color
+[]move into system
+[]develop bg replace program

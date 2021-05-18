@@ -1,0 +1,54 @@
+#[实验D-1:实验误差探测]
+#项目:dbUniversalSetPureapkforest_EvaluateMethods;UniversalSet_lim20_EvaluateXXX0;UniversalSet_lim20_EvaluateXXXX
+#子任务:lim20fuse4420_raw_hierarch_vgg_if;lim20fuse4510_raw_hierarch_vgg_if;
+#运行命令:python Assistant/Interpreter.py /home/dl/users/wangruifeng/05MisleadingWidgets/androidwidgetclustering/Assistant/cmds/D-1实验误差探测.txt
+
+######################### 1.选择本次的数据库
+A cb db_universal_set
+A cf pureapkforest
+#-------------------------------------------------------------------
+######################### 2.打开项目
+A o dbUniversalSetPureapkforest_EvaluateMethods.puremapi_raw_simcheck_vgg_ifcheck--m减少vgg_puremethodapi_Sim_iforest实验误差[实验D-1:实验误差探测]
+
+
+######################### 6.DE
+#DE mvector
+
+#DE cutdim raw
+#DE copy vgg_puremethodapi_Sim_iforest 
+
+######################### 7.VC
+VC sim
+
+######################### 8.OD
+OD run
+
+
+######################### 1.选择本次的数据库
+A cf lim20apkforest
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_lim20_EvaluateXXX0.lim20fuse3340_raw_hierarchcheck_vgg_ifcheck--m减少lim20fuse3340_raw_hierarch_vgg_if实验误差[实验D-1:实验误差探测]
+
+######################### 6.DE
+DE copy lim20fuse3340_raw_hierarch_vgg_if
+
+######################### 7.VC
+VC auto 3340
+
+######################### 8.OD
+OD run
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_lim20_EvaluateXXXX.lim20fuse3331_raw_hierarchcheck_vgg_ifcheck--m减少lim20fuse3331_raw_hierarch_vgg_if实验误差[实验D-1:实验误差探测]
+
+######################### 6.DE
+DE copy lim20fuse3331_raw_hierarch_vgg_if
+######################### 7.VC
+VC auto 3331
+
+######################### 8.OD
+OD run
+   
+

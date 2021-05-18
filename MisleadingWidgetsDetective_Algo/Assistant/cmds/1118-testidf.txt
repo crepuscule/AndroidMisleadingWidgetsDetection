@@ -1,0 +1,26 @@
+#尝试kpca降维到700,300,150的效果对比
+A o TestIDFProject.hog_raw_widgetdbscan_iforest
+######################### DP
+# 已经提前处理过
+
+######################### DT
+# ok
+#DT run resize,ocr
+
+######################### IF
+IF extif hog
+
+######################### DE
+DE vector
+
+DE cutdim raw
+#DE cutdim kpca,500
+######################### VC
+VC search
+VC run
+#VC eval
+
+######################### OD
+OD run
+#OD eval
+

@@ -1,0 +1,48 @@
+#[实验IDF:去除极大IDF以便簇更多]
+#项目:UniversalSet_smalleridfapi_EvalAPI
+#子任务:
+#运行命令:python Assistant/Interpreter.py /home/dl/users/wangruifeng/05MisleadingWidgets/androidwidgetclustering/Assistant/cmds/IDF-去除极大IDF以便簇更多.txt
+
+
+######################### 1.选择本次的数据库
+A cb db_universal_set
+A cf smalleridfapi
+#-------------------------------------------------------------------
+######################### 2.打开项目
+A o UniversalSet_smalleridfapi_EvalAPI.fuse3331_raw_hierarch_vgg_if--m结合doc方法+IDF去除极大方法[实验IDF:去除极大IDF以便簇更多]
+
+
+######################### 6.DE
+DE copy fuse1110_raw_hierarch_vgg_if
+
+
+######################### 7.VC
+VC auto 3331
+
+######################### 8.OD
+OD run
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_smalleridfapi_EvalAPI.fuse3340_raw_hierarch_vgg_if--m合理API层级+IDF去除极大方法[实验IDF:去除极大IDF以便簇更多]
+
+DE copy fuse1110_raw_hierarch_vgg_if
+######################### 5.IF
+VC auto 3340
+
+######################### 8.OD
+OD run
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_smalleridfapi_EvalAPI.fuse5552_raw_hierarch_vgg_if--m尝试扩大权重,结合doc方法+IDF去除极大方法[实验IDF:去除极大IDF以便簇更多]
+
+DE copy fuse1110_raw_hierarch_vgg_if
+######################### 5.IF
+VC auto 5552
+
+######################### 8.OD
+OD run
+
+
+

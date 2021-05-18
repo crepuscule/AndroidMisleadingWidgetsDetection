@@ -1,0 +1,23 @@
+#尝试kpca降维到700,300,150的效果对比
+A o TestProcessProject.hog_kpca500_optics5
+######################### DP
+# 已经提前处理过
+
+######################### DT
+DT run resize,ocr
+
+######################### IF
+IF extif hog
+
+######################### DE
+DE vector
+
+DE cutdim kpca,500
+######################### VC
+VC run
+#VC eval
+
+######################### OD
+OD run
+#OD eval
+

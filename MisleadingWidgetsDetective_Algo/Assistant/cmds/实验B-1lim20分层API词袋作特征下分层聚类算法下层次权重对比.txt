@@ -1,0 +1,69 @@
+#[实验B-1：lim20,分层API词袋作特征下,分层聚类算法下,层次权重对比]
+#项目:UniversalSet_lim20_EvaluateXXX0
+#子任务:lim20fuse3340_raw_hierarch_vgg_if;lim20fuse2350_raw_hierarch_vgg_if;lim20fuse2260_raw_hierarch_vgg_if;lim20fuse1180_raw_hierarch_vgg_if
+
+######################### 1.选择本次的数据库
+
+#-------------------------------------------------------------------
+######################### 2.打开项目
+A o UniversalSet_lim20_EvaluateXXX0.lim20fuse3340_raw_hierarch_vgg_if
+
+######################### 3.DP
+# 已经提前处理过
+
+######################### 4.DT
+DT run lim20
+
+######################### 5.IF
+IF extif vgg
+
+######################### 6.DE
+DE vector
+
+DE cutdim raw
+######################### 7.VC
+VC search 3340
+
+VC run 3340
+
+######################### 8.OD
+OD run
+
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_lim20_EvaluateXXX0.lim20fuse2350_raw_hierarch_vgg_if
+
+######################### 7.VC
+VC search 2350
+
+VC run 2350
+
+######################### 8.OD
+OD run
+
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_lim20_EvaluateXXX0.lim20fuse2260_raw_hierarch_vgg_if
+
+######################### 7.VC
+VC search 2260
+
+VC run 2260
+
+######################### 8.OD
+OD run
+
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_lim20_EvaluateXXX0.lim20fuse1180_raw_hierarch_vgg_if
+
+######################### 7.VC
+VC search 1180
+
+VC run 1180
+
+######################### 8.OD
+OD run

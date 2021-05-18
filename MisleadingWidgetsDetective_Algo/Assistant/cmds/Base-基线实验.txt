@@ -1,0 +1,21 @@
+#[实验Base:基线实验]
+#项目:UniversalSet_centeridfapi_EvalAPI
+#子任务:
+#运行命令:python Assistant/Interpreter.py /home/dl/users/wangruifeng/05MisleadingWidgets/androidwidgetclustering/Assistant/cmds/Base-基线实验.txt
+
+
+######################### 1.选择本次的数据库
+A cb db_universal_set
+A cf forforlimn
+#-------------------------------------------------------------------
+
+A o UniversalSet_forforlimn_EvalCluster.rawapi_raw_kmeans_hog_if
+#--mforfor数据集下基线方法原ApiKmeansHog[实验Base:基线实验]
+
+#DE mvector
+
+DE cutdim kpca,1000
+
+VC auto @kmeans
+
+OD run

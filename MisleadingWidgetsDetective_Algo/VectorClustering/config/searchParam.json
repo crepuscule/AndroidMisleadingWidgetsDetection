@@ -1,0 +1,9 @@
+{
+"clusterer_name":"dbscan",
+"ranges":[[1,20,5],[1,50,10]],
+"data":"",
+"param_scale":[10,1],
+"metricstring":"",
+"filterFun":"",
+"verbose":""
+}

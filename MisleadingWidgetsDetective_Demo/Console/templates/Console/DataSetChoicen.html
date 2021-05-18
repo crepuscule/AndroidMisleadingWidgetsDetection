@@ -1,0 +1,623 @@
+﻿<!--  最常用的，要给别人看得 evaluateCluster.html`-->
+<!--查看详细簇的html,目前需要显示API -->
+<!--
+应该支持的功能：
+1. 翻页，暂不需要其它快捷功能
+2. 搜索
+3. 提交suspect，但是不是到原来的接口
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <!-- Bootstrap Styles-->
+    <link href="{{staticPath}}/css/bootstrap.css" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <!--<link href="{{staticPath}}/css/font-awesome.css" rel="stylesheet" />-->
+    <link rel="stylesheet" href="http://libs.baidu.com/fontawesome/4.0.3/css/font-awesome.min.css">
+    <!-- Custom Styles-->
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <title>Outliers Preview</title>
+
+    <link href="{{staticPath}}/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <style>
+    .appcolor0{
+		background: orangered;
+    }
+    .appcolor1{
+		background: Aquamarine;
+    }
+    .appcolor2{
+		background: gold;
+    }
+    .appcolor3{
+		background: DeepSkyBlue;
+    }
+    .appcolor4{
+		background: darkorange; 
+    }
+    .appcolor5{
+		background: darkcyan;
+    }
+    .appcolor6{
+		background: BlueViolet;
+    }
+    .inspected{
+		font-size: 16px;
+		text-overflow: ellipsis;
+		overflow: hidden;/* 超出的文本隐藏 */
+		padding-top:0px;
+		z-index:-1;
+        font-weight: 40;
+        text-decoration:line-through;
+        
+    }
+	.button_text{
+		font-size: 16px;
+		text-overflow: ellipsis;
+		overflow: hidden;/* 超出的文本隐藏 */
+		padding-top:0px;
+		z-index:-1;
+	}
+	.outer{
+	    width: 224px;
+	    height: 258px;
+	    position: relative;
+	    margin-right: 30px;
+	    margin-bottom: 30px;
+	}
+	.outer_with_api_smi{
+	    width: 224px;
+	    height: 350px;
+	    position: relative;
+	    margin-right: 30px;
+	    margin-bottom: 30px;
+	}
+	.outer_with_api{
+	    width: 224px;
+	    height: 400px;
+	    position: relative;
+	    margin-right: 30px;
+	    margin-bottom: 30px;
+	}
+	.center{
+	    width:200px;
+	    height: 34px;
+	    margin-left: 10px;
+	    margin-right: 10px;
+	    position: absolute;
+	    border-radius: 0px;
+	    z-index:1;
+	}
+	.apiType{
+	    font-size: 13px;
+	    width:224px;
+	    height: 142px;
+	    margin-top: 50px;
+	    margin-bottom: 100px;
+	    position: absolute;
+	    text-align:center;
+	    /*white-space: nowrap;*/
+	    overflow:auto;
+	    text-overflow: ellipsis;
+	}
+	.apiContent{
+	    font-size: 13px;
+	    width:224px;
+	    height: 34px;
+	    margin-top: 100px;
+	    position: absolute;
+	    text-align:center;
+	}
+	.hidden{
+		display:none;
+	}
+	.totalhidden{
+		display:none;
+	}
+        .outlier{
+	   /*border:2px solid #C3464F;*/
+	}
+    .topoutlier{
+	   border:5px solid #C3464F;
+	}
+        .hightlight{
+	   border:5px solid #FFCC00;
+	}
+    	input[type=range]:first-of-type {
+          width: 650px;
+        }
+        #one {
+                transform: rotate(90deg);
+                -ms-transform: rotate(90deg); /* IE 9 */
+                -moz-transform: rotate(90deg); /* Firefox */
+                -webkit-transform: rotate(90deg); /* Safari and Chrome */
+                -o-transform: rotate(90deg); /* Opera */
+        }
+    .isotopeSelect{
+        margin-bottom:60px;
+        padding-left:0px;
+    }
+    .suspect{
+      color: red;
+    }
+    .notsuspect{
+
+    }
+    .covered{
+      background:green;
+    }
+    .to_cover{
+      background:blue;
+    }
+    .top20p{
+      /*background:yellow;*/
+    }
+    .detected{
+	   border:5px solid red;
+       border-radius:10px;
+    }
+    .detected_nodisplay{
+    }
+    .cod_advise-1{
+	   border:5px solid black;
+       border-radius:10px;
+    }
+    </style>
+
+
+</head>
+
+<body>
+                <div class="">
+                    <div class="col-md-12">
+                        <h1 class="" style="text-align:center;">
+				Outliers Preview
+                        </h1>
+      				<h1 style="text-align:center;margin-bottom:30px;"><small>{{current_db}}</small>&nbsp;<small id='type_text'>This Cluster: Share, Selected 65/100, </small></h1>
+
+			<hr/>
+                    </div>
+                </div>
+
+
+                <div class="row panel"  style="padding-bottom:50px;">
+		<section id="page-content" class="index-page ">
+
+			<input type="range" value="0" min="-1" max="{{new_max_cluster}}" id="one" style="position: fixed;bottom:40%;right:-13%;" />
+			<div id="uno" style="position: fixed;bottom:4.5%;right:3.7%;">*&nbsp;</div>
+      <button id="before" class="btn btn-default" style="position: fixed;bottom:0%;right:33.7%;z-index:2;">上一页</button>
+      <button id="allselect" class="btn btn-success" style="position: fixed;bottom:0%;right:23.7%;z-index:2;">本簇全选</button>
+      <button id="next" class="btn btn-default" style="position: fixed;bottom:0%;right:13.7%;z-index:2;">下一页</button>
+      <button id="nextToCovered" class="btn btn-default" style="position: fixed;bottom:0%;right:3.7%;z-index:2;">下一tocover</button>
+			<div id="changeApiShow" style="position:fixed; top:16%;right:3.6%;font-size: 25px;"><i id="showIcon" class="fa fa-th-large"></i> </div>
+
+			<section class="box-content box-1">
+				<div class="container" style="width:100%;height:1000px;">
+					<div class="heading wow" style="margin-bottom: 0px;">
+					<div class="row" style="margin-bottom: 30px;">
+					  <div class="col-md-8 col-md-offset-2">
+					    <div class="input-group" >
+					      <input type="text" class="form-control" style="margin-top:15px;" placeholder="Search for..." id="searchFilter">
+					      <span class="input-group-btn" >
+						<button class="btn btn-default" style="margin-top:15px;margin-left:5px;border-radius:0px;width:100px;" id='search' type="button">Find Clusters</button>
+					      </span>
+                        <span class="input-group-btn" >
+                          <button id='submit' class="btn btn-info" style="margin-top:15px;margin-left:5px;border-radius:0px;" type="button">Submit Selection</button>
+                          <!--<button id='exportInfo' class="btn btn-success" style="margin-top:15px;margin-left:5px;border-radius:0px;" type="button">Export Basic Info</button>-->
+                        </span>
+                        <span class="input-group-btn" >
+                          <button id='open_modal' class="btn btn-warning" style="margin-top:15px;margin-left:5px;border-radius:0px;"  type="button">Open Modal</button>
+                        </span>
+                        <span class="input-group-btn" >
+                          <button id='randomMark' class="btn btn-success" style="margin-top:15px;margin-left:5px;border-radius:0px;"  type="button">Random Mark</button>
+                        </span>
+                        <span class="input-group-btn" >
+                          <button id='clearSelect' class="btn btn-success" style="margin-top:15px;margin-left:5px;border-radius:0px;"  type="button">Clear Selection</button>
+                        </span>
+                        <span class="input-group-btn" style="width:20%;">
+                        <select class="form-control" id="markto" style="margin-top:15px;margin-left:5px;border-radius:5px;">
+                            <option value='current' selected>Current</option>
+                         {% for key,value in label_type.items %}
+                            <option value='{{key}}'>{{value}}</option>
+                         {% endfor %}
+                        </select>
+                        </span>
+                        
+                        <!--
+                        <span class="input-group-btn" >
+                          <button id='clearSuspects' class="btn btn-warning" style="margin-top:15px;margin-left:5px;border-radius:0px;" type="button">Clear Suspects</button>
+                        </span>
+                        -->
+                        
+					    </div>
+					  </div>
+					</div>
+
+					<div name="图片总容器" class="isotopeTotal col-lg-10 col-sm-10 col-md-10 col-md-offset-1">
+
+                    {% for info in rawapkTree %}
+                    <div class="isotopeSelect col-lg-2 col-sm-2 col-md-2   outer C{{info.image_cluster_no}} ">
+                                <p style="text-align:center;margin-top:-5px;">{{info.app}}</p>
+                                <img src="{{picturePath}}{{BaseDir}}{{info.path}}"  alt="" style="margin: auto;width: 224px;">
+      							<!--<img src="{{picturePath}}{{BaseDir}}{{info.0.path}}" class="{{info.1.isOutlier}} {{info.1.hightlight}} imageinfo cod_advise{{info.1.outlier_advise}}" alt="" style="padding-left:4px;margin: auto;width: 220px;" app='{{info.0.app}}' sort='{{info.1.outlier_sort}}' score='{{info.1.outlier_score}}' percent_sort="{{info.1.outlier_percent_sort}}" global_sort="{{info.1.global_outlier_sort}}" global_sort_ratio="{{info.1.global_outlier_sort_ratio}}">-->
+                                <!--{{info.0.suspect} ==> abadon}-->
+      							<button type="button" class="btn btn-default center markAsSuspect notsuspect C{{info.image_cluster_no}}"  data-toggle="tooltip" data-placement="bottom" title="Click to mark as suspect:{{info.0.app}}" icon_path="{{info.path}}" icon_label="{{info.image_cluster_no}}"icon_type="{{info.type}}" comment=''>Add To DataSet</button>
+                                  <p class="info" style="opacity:0;font-size:0px;display:none;" ></p>
+      							<p style="opacity:0;font-size:0px;" id="C{{info.0.widget}}">{{BaseDir}}{{info.0.app}}</p>
+
+    						</div>
+					{% endfor %}
+					</div>
+				</div>
+
+			</section>
+
+	<script type="text/javascript" src="{{staticPath}}/js/jquery-1.10.2.js"></script>
+    <script src="{{staticPath}}/js/jquery.metisMenu.js"></script>
+
+    <script src="{{staticPath}}/js/bootstrap.min.js"></script>
+    <!-- Custom Js -->
+
+	<!--<div id="page-top"><a href="#page-top" class="btn btn-toTop"><i class="fa fa-angle-double-up"></i></a></div>-->
+	<!-- ========== Scripts ========== -->
+	<script type="text/javascript" src="{{staticPath}}/gallery-js/jquery.scrollTo.min.js"></script>
+	<script type="text/javascript" src="{{staticPath}}/gallery-js/isotope.pkgd.min.js"></script>
+  <script src="{{staticPath}}/js/json2csv.js" type="text/javascript" charset="utf-8"></script>
+  <!-- <script type="text/javascript" src="{{staticPath}}/clipboard.js-master/dist/clipboard.min.js"></script> -->
+	<!-- Definity JS -->
+	<script type="text/javascript">
+		console.log('reday')
+        window.database = "{{current_db}}"
+        window.myWidgets = new Array();
+        window.suspects = new String();
+        window.selected_icons = new Array();
+        window.type_nums = Number("{{new_max_cluster}}")+1
+        label_type_map_string = '{{label_type_map}}'
+        window.label_type_map = JSON.parse(label_type_map_string.replace(/&quot;/g, '"'))
+        for (var i=0;i<window.type_nums;i++){
+            window.selected_icons.push(new Array())
+            console.log('0 :window.selected_icons init')
+        }
+        console.log('1',window.selected_icons)
+
+		$(document).ready(function () {
+			function filter(filterValue){
+				$('.isotopeSelect').addClass('totalhidden')
+				$('.markAsSuspect').addClass('totalhidden')
+				console.log('filtering',filterValue)
+				$(filterValue).removeClass('totalhidden')
+				console.log(filterValue,'done')
+			}
+			// 如果hightlight，选hightlight所在簇
+			hightlightCluster = ("{{hightlightCluster}}").toString()
+			if (hightlightCluster != '')filter('.C'+hightlightCluster)
+
+      current_cluster_no = 0
+      filterValue = '.C' + current_cluster_no
+      filter(filterValue)
+      /*console.log('current_cluster_no',current_cluster_no)
+      if (current_cluster_no !=''){
+        $('#uno').html(current_cluster_no)
+        filterValue = '.C' + current_cluster_no
+        filter(filterValue)
+      }else{
+        current_cluster_no = 0
+      }*/
+
+		$('#one').bind('input ',function(){
+			console.log('input!')
+			$('#uno').html($(this).val())
+			filterValue = '.C' + $(this).val()
+			filter(filterValue)
+            refresh_type_info();
+		})
+
+      $('#allselect').click(function(){
+        // select all widget ,into the window.myWidgets
+           $('.isotopeSelect').not('.totalhidden').each(function(){
+            $(this).find('button').each(markSuspects)
+           })
+        
+      })
+      function before_action(){
+        current_cluster_no = $('#uno').html()
+        if(current_cluster_no == '*'){
+          current_cluster_no = 1
+        }else{
+          current_cluster_no = parseInt(current_cluster_no) -1
+        }
+        $('#uno').html(current_cluster_no)
+        filterValue = '.C' + current_cluster_no
+        filter(filterValue)
+        $('#one').val(current_cluster_no)
+        refresh_type_info();
+      }
+      $('#before').click(before_action);
+
+      function next_action(){
+        current_cluster_no = $('#uno').html()
+        if(current_cluster_no == '*'){
+          current_cluster_no = 1
+        }else{
+          current_cluster_no = parseInt(current_cluster_no) +1
+        }
+        $('#uno').html(current_cluster_no)
+        filterValue = '.C' + current_cluster_no
+        filter(filterValue)
+        $('#one').val(current_cluster_no)
+        refresh_type_info();
+      }
+      $('#next').click(next_action);
+        
+      function search_action(){
+      	console.log('click!')
+      	var filterValue = $('#searchFilter').val();
+        current_cluster_no = filterValue
+      	if(filterValue == "*"){
+      		filterValue = '.isotopeSelect'
+      	}else{
+      		filterValue = '.C' + $('#searchFilter').val();
+      	}
+      	filter(filterValue)
+        $('#uno').html(current_cluster_no)
+        $('#one').val(current_cluster_no)
+        refresh_type_info();
+      
+      }
+      $('#search').click(search_action);
+      
+      function refresh_type_info(){
+        // 获取元素
+        //# 获取当前类型
+        //var show_list = $(".isotopeSelect").not('.totalhidden')
+        //var type = show_list[0].children[2].getAttribute('icon_type')
+        //var label = Number(show_list[0].children[2].getAttribute('icon_label'))
+        var label = parseInt($('#uno').html())
+        var type = window.label_type_map[current_cluster_no]
+        //# 更改元素
+        var new_type_text = ' This Cluser: ' + type + ' ,Selected ' + window.selected_icons[label].length + '/100'
+        $('#type_text').html(new_type_text)
+      }
+
+
+      $('.imageinfo').click(function () {
+        console.log('simple info')
+        infoobject = $(this).next().children('.info')
+          var clusteraddress = 'C'+infoobject.attr('clusteraddress')+' RC'+infoobject.attr('realclusteraddress')
+          var clusterlinkIndex = window.location.href.lastIndexOf("\/")
+          var clusterlink = window.location.href.substring(0,clusterlinkIndex)+'/'+infoobject.attr('clusteraddress')
+          var newSuspect =
+            {
+             'appwebsite':infoobject.attr('appwebsite'),
+             'app':infoobject.attr('app'),
+             'clusteraddress':clusteraddress,
+           }
+        
+        //info =JSON.stringify(newSuspect) 
+        // use prompt to get th comment
+        comment = prompt('app:'+infoobject.attr('app')+' 可以在下面评论,使用All:xxx可以将评论广播到本簇','当前comment:'+$(this).next().attr('comment'));
+        if(comment.indexOf('All:') >= 0){
+           $('.isotopeSelect').not('.totalhidden').each(function(){
+            $(this).find('button').attr('comment',comment.replace('All:',''))
+           })
+        }
+        else{
+            $(this).next().attr('comment',comment)
+        }
+      })
+
+
+     function markSuspects(){
+            console.log('in markSuspects')
+            var newSuspect = {
+                'icon_path':$(this).attr('icon_path'),
+                'icon_label':$(this).attr('icon_label')
+            }
+            markto = $('#markto option:selected').val();
+            if (markto != 'current'){
+                newSuspect.icon_label = markto
+            }
+            console.log(newSuspect)
+            icon_label_number = Number(newSuspect.icon_label)
+            console.log('icon_label_number:',icon_label_number)
+            if ($(this).hasClass('btn-default')){
+                console.log('marking as suspect')
+                $(this).removeClass('btn-default').addClass('btn-info')
+                 window.selected_icons[icon_label_number].push(newSuspect)
+                console.log('window.selected_icons[icon_label_number]',window.selected_icons[icon_label_number])
+                //refresh_type_info();
+            }else{
+                console.log('marking as not suspect')
+                $(this).removeClass('btn-info').addClass('btn-default')
+                for(var i=0;i<window.selected_icons[icon_label_number].length;i++){
+                  if (window.selected_icons[icon_label_number][i].icon_path == newSuspect.icon_path){
+                    window.selected_icons[icon_label_number].splice(i,1)
+                  }
+                }
+                //refresh_type_info();
+            }
+     }
+     $('.markAsSuspect').click(markSuspects);
+
+    $('.randomMark').click(function(){
+        var ans = 0;
+        $('.markAsSuspect').not('.totalhidden').each(function(){
+            if (Math.round(Math.random()) == 1 && ans < 150){
+              markSuspects();  
+              ans += 1;
+            }else{
+               return ;
+            }
+
+        });
+    });
+
+    $('.clearSelect').click(function(){
+        window.selected_icons = new Array()
+        for (var i=0;i<window.type_nums;i++){
+            window.selected_icons.push(new Array())
+        }
+
+        $('.markAsSuspect').each(function(){
+          $(this).removeClass('btn-info').addClass('btn-default')
+        })
+
+    });
+
+
+    // 导出手动选中的异常控件
+    $('#exportCSV').click(function(){
+      var fields = ['download','appname','logoaddr','logo','appwebsite','app','iconaddr','icon','clusteraddress',
+      'clusterlink','appscreenshot','clusterscreenshot','api','problem','contact','storeinfo'];
+      // 进行数据库提交
+      console.log('#exportCSV: windows.suspects',window.suspects)
+      console.log('#exportCSV: windows.myWidgets',window.myWidgets)
+      suspects_app = ''
+      for(item in window.myWidgets){
+        suspects_app += (window.myWidgets[item]['app']+';')
+      }
+      widgetMoewInfo = new Array()
+      $.ajax({
+              type: 'GET',
+              url: '/Console/submitSuspects',
+              data: {'suspects':window.suspects,'suspects_app':suspects_app},
+              dataType: 'json',
+              contentType: 'application/json; charset=UTF-8',
+              success: function(data) {
+                widgetMoewInfo = data['data']
+                console.log('in ajax: widgetMoewInfo',widgetMoewInfo)
+                alert(data['msg']+' 已提交到数据库!')
+                for(var i=0; i < window.myWidgets.length; i++){
+                  console.log('in for widgetMoewInfo',widgetMoewInfo)
+                  window.myWidgets[i]['logoaddr'] = widgetMoewInfo[i][0]
+                  window.myWidgets[i]['appname'] = widgetMoewInfo[i][1]
+                  window.myWidgets[i]['contact'] = widgetMoewInfo[i][2]
+                  window.myWidgets[i]['download'] = widgetMoewInfo[i][3]
+                }
+                var csv = json2csv({ data: window.myWidgets, fields: fields });
+                funDownload(csv, 'test.csv');
+              } 
+      })
+    });
+    $('#exportInfo').click(function(){
+      var fields = ['app','iconaddr','icon','clusteraddress','clusterlink','api','problem','storeinfo'];
+      // 进行数据库提交
+      console.log('#exportInfo: windows.suspects',window.suspects)
+      console.log('#exportInfo: windows.myWidgets',window.myWidgets)
+      var csv = json2csv({ data: window.myWidgets, fields: fields });
+      funDownload(csv, 'info.csv');
+    });
+    $('#clearSuspects').click(function(){
+        $('.markAsSuspect').each(function(){
+          $(this).removeClass('btn-info').addClass('btn-default')
+        })
+        window.myWidgets = new Array();
+    });
+
+    $('#submit').click(function(){
+        // 直接将数组join即可
+        var submit_string = new String()
+        for(var i = 0 ; i < window.selected_icons.length ; i++){
+            for(var j = 0 ; j < window.selected_icons[i].length ; j++){
+                submit_string += window.selected_icons[i][j]['icon_path'] +','+ window.selected_icons[i][j]['icon_label'] 
+                if( j != window.selected_icons[i].length-1){
+                    submit_string += ';'
+                }
+            }
+            if(i!=window.selected_icons.length-1){
+                submit_string += '|'
+            }
+        }
+        $.ajaxSetup({
+            data:{csrfmiddlewaretoken:'{{ csrf_token }}'}
+        })
+        console.log('submit_string',submit_string)
+        $.post(
+            '/Console/submitdatasetchoicen/'+window.database,
+            {selected_icons:submit_string},
+            function(result){
+                alert('提交成功,自动切换到数据页')
+            }   
+        );
+    })
+
+
+    //-----------------------------------Misleading标记组件------------------------------------END//
+    //-----------------------------------易用性组件--------------------------------------------STR
+    // 目录: 键盘快捷键;控件颜色区分;
+    $(document).keyup(function(e){
+        //https://blog.csdn.net/weixin_44538469/article/details/91356940
+         switch(e.which) { 
+             //s S
+             case 83:    $('#searchFilter').focus(); 
+                         break;   
+             // Enter
+             case 13:    search_action(); 
+                         break;   
+             // left
+             case 37:    before_action(); 
+                         break;   
+             // right
+             case 39:    next_action(); 
+                         break;   
+        }
+     })
+     
+     $('#myModal').modal('hide')
+
+         $('#open_modal').click(function(){
+            modal_selected_icon_show_content= '<table>'
+                                       
+            for(var i = 0 ; i < window.selected_icons.length ; i++){
+                x = ( '<tr><tb><big>' + i.toString() + ' </big></tb><tb><big>' + window.selected_icons[i].length.toString() +'</big></tb></tr><hr/>' );
+                modal_selected_icon_show_content += x
+            }
+            modal_selected_icon_show_content += '</table>'
+            console.log('modal_selected_icon_show_content',modal_selected_icon_show_content)
+            $('#modal_selected_icon_show').html(modal_selected_icon_show_content)
+            $('#myModal').modal('show')
+
+        });
+    }); //JQUERY END
+
+	</script>
+	<script src="{{staticPath}}/js/html5slider.js"></script>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-lg" style="width:80%">
+        <div class="modal-content" >
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                     {% if language == 'zh' %}
+                     已选
+                     {% else %}
+                     Selected Icons
+                     {% endif %}
+                </h4>
+            </div>
+            <div class="modal-body">
+                    <div class="list-group" id="modal_selected_icon_show">
+                   </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                     {% if language == 'zh' %}
+                    关闭
+                     {% else %}
+                    Close
+                     {% endif %}
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+    
+</body>
+
+</html>

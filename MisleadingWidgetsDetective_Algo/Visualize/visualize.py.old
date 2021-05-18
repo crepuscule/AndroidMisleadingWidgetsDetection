@@ -1,0 +1,33 @@
+def analysis(apkTree):
+    # apkTree是apk-image-methods 的形式，需要变为apk-methods-image的形式
+    print('apkTree len',len(apkTree))
+
+    # 将apkTree转化为统计分析形式的tree
+    analysisTree = dict()
+    for key,value in apkTree.items():
+        # 首先给新tree注册这个键,每个键在遍历中只会出现一次
+        analysisTree[key] = dict()
+
+        # 遍历value，将",".join(methods)作为该apk内部的apis模式键
+        for image,methods in value.items():
+            # 实际上apkTree中methods数组已经定形，这里固化为字符串
+            apis = ",".join(methods)
+            # 如果这个固化字符串已经在了，说明就重复了，往里加image看看问题多严重
+            if apis in analysisTree[key]:
+                analysisTree[key][apis].append(image)
+            else:
+                analysisTree[key][apis] = [image]
+
+    # 上面这个tree已经完成了统计，下面用showTree进行展示
+    showTree = dict()
+    for key,value in analysisTree.items():
+        showTree[key] = [0,0]
+        showTree[key][0] = len(analysisTree[key])
+        showTree[key][1] = len(apkTree[key])
+        # 可以用apkTree高效计算，不需要用以下方法
+        #showTree[key][2]  = 0
+        #for methods,images in value.items():
+        #    showTree[key][2] += len(images)
+
+    return analysisTree,showTree
+

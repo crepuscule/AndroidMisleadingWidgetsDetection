@@ -1,0 +1,34 @@
+#尝试kpca降维到700,300,150的效果对比
+A o MW_spe
+######################### DP
+# 已经提前处理过
+
+A sub spm_spe300_optics3
+######################### DT
+DT apktree csvsets
+
+######################### IF
+IF extif spm
+
+######################### DE
+DE vector  
+
+
+
+DE cutdim spe,300
+######################### VC
+VC run
+#VC eval
+######################### OD
+OD run
+#OD eval
+
+
+A sub spm_spe150_optics3
+DE cutdim spe,150
+######################### VC
+VC run
+VC eval
+######################### OD
+OD run
+OD eval

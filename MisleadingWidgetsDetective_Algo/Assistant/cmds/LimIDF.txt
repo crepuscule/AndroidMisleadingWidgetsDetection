@@ -1,0 +1,112 @@
+#[实验LimIDF:IDF方法引入lim]
+#项目:UniversalSet_centeridfapi_EvalAPI
+#子任务:
+#运行命令:python Assistant/Interpreter.py /home/dl/users/wangruifeng/05MisleadingWidgets/androidwidgetclustering/Assistant/cmds/LimIDF.txt
+
+######################### 1.选择本次的数据库
+A cb db_universal_set
+A cf smalleridfapilim20
+#-------------------------------------------------------------------
+######################### 2.打开项目
+A o UniversalSet_smalleridfapilim20_EvalAPI.fuse3331_raw_hierarch_vgg_if--m引入limit20尝试效果[实验LimIDF:IDF方法引入lim]
+
+
+######################### 6.DE
+DT run apiidf-smallerlim20
+
+DE vector
+
+DE cutdim raw 
+######################### 7.VC
+VC auto 3331
+
+IF extif cnn-vgg
+
+######################### 8.OD
+OD run
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_smalleridfapilim20_EvalAPI.fuse3340_raw_hierarch_vgg_if--m合理API层级+IDF去除两极方法[实验LimIDF:IDF方法引入lim]
+
+DE copy fuse3331_raw_hierarch_vgg_if
+######################### 5.IF
+VC auto 3340
+
+######################### 8.OD
+OD run
+
+
+
+
+
+
+######################### 1.选择本次的数据库
+
+A cf centeridfapilim20
+#-------------------------------------------------------------------
+######################### 2.打开项目
+A o UniversalSet_centeridfapilim20_EvalAPI.fuse3331_raw_hierarch_vgg_if--m引入limit20尝试效果[实验LimIDF:IDF方法引入lim]
+
+
+######################### 6.DE
+DT run apiidf-centerlim20
+
+DE vector
+
+DE cutdim raw 
+######################### 7.VC
+VC auto 3331
+
+IF extif cnn-vgg
+
+######################### 8.OD
+OD run
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_centeridfapilim20_EvalAPI.fuse3340_raw_hierarch_vgg_if--m合理API层级+IDF去除两极方法[实验LimIDF:IDF方法引入lim]
+
+DE copy fuse3331_raw_hierarch_vgg_if
+######################### 5.IF
+VC auto 3340
+
+######################### 8.OD
+OD run
+
+#-------------------------------------------------------------------
+
+
+
+
+
+A cf verycenteridfapilim20
+#-------------------------------------------------------------------
+######################### 2.打开项目
+A o UniversalSet_verycenteridfapilim20_EvalAPI.fuse3331_raw_hierarch_vgg_if--m引入limit20尝试效果[实验LimIDF:IDF方法引入lim]
+
+
+######################### 6.DE
+DT run apiidf-verycenterlim20
+
+DE vector
+
+DE cutdim raw 
+######################### 7.VC
+VC auto 3331
+
+IF extif cnn-vgg
+######################### 8.OD
+OD run
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_verycenteridfapilim20_EvalAPI.fuse3340_raw_hierarch_vgg_if--m合理API层级+IDF去除两极方法[实验LimIDF:IDF方法引入lim]
+
+DE copy fuse3331_raw_hierarch_vgg_if
+######################### 5.IF
+VC auto 3340
+
+######################### 8.OD
+OD run
+

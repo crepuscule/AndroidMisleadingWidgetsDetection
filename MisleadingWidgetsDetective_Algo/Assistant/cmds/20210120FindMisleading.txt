@@ -1,0 +1,35 @@
+# 寻找Misleading Widget之章
+
+# 任务1: 对所有的神器进行整理，全部重新构建，命名db_pure_big
+注意：彻头彻尾重新构建，仔细检查文字筛选模块，确保工作正常
+
+# 任务2: 向领主禀报此事，领主会将此事记入国册(数据库)
+注意：构建中即构建纯doc的也构建method api的，后面降维时通用
+子：apilimit = 5
+子：apilimit = 7
+子：apilimit = 999
+
+# 任务3: 领主告知你有一些初级法师可以先将一些劣质法器筛除，你主持完成后需要禀报领主在国册中将其删除
+注意：只要有字都删除掉，如果字太多应该是任务2完成的不好
+
+# 任务4: 领主只能帮到你这，作为P7级别的大法师，你需要用你的凝聚膜法将同类别的法器聚集，然后从中找出盗版的
+子任务1: api完全相同的
+子任务2: 同时考虑的
+
+# 任务5: 聚集完成之后，用还未成熟的鉴别术自动鉴别，然后需要你亲自审核
+使用OD run，再打开网页任务
+
+数据集任务
+compatibleapilimit5 8318 - 884
+pure_big_FindMisWid.hog_complimit5sim_raw_hierarch_iforest  << DT 5 api limit DE mvector VC sim
+pure_big_FindMisWid.hog_complimit5fuse_raw_hierarch_iforest
+
+数据集任务
+compatibleapilimit7
+pure_big_FindMisWid.hog_complimit7sim_raw_hierarch_iforest
+pure_big_FindMisWid.hog_complimit7fuse_raw_hierarch_iforest
+
+数据集任务
+compatibleapilimitn
+pure_big_FindMisWid.hog_complimitnsim_raw_hierarch_iforest
+pure_big_FindMisWid.hog_complimitnfuse_raw_hierarch_iforest

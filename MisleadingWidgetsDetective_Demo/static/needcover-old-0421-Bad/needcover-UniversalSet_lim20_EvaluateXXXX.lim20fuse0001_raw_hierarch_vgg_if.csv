@@ -1,0 +1,6 @@
+控件icon名,包含簇号,是否命中,簇内排序,簇内控件总数,"top-1,3,5命中",top-20%命中,Threshold0.49命中,原始簇号
+view_c6ff152fa1f117da252ea351460521be.png,9,True,0,2,True,True,True,333
+view_0702af1b9b25fd7f1de5a51d009bf36c.png,10,True,0,2,True,True,True,5
+view_bed672cef70c91b21e0092a3bbffb37b.png,14,True,0,2,True,True,True,336
+view_6699c5c7b85728194b0e746ce23b8fe9.png,48,False,1,2,False,False,False,274
+view_9099969ab4a16a477182d4d0a355d0bc.png,65,True,0,2,True,True,True,93

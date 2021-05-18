@@ -1,0 +1,69 @@
+#[实验C-1：lim20,分层API词袋和语义联合作特征下,分层聚类算法下,层次权重对比]
+#项目:UniversalSet_lim20_EvaluateXXXX
+#子任务:lim20fuse0001_raw_hierarch_vgg_if;lim20fuse1117_raw_hierarch_vgg_if;lim20fuse2224_raw_hierarch_vgg_if;lim20fuse3331_raw_hierarch_vgg_if
+#运行命令:python Assistant/Interpreter.py /home/dl/users/wangruifeng/05MisleadingWidgets/androidwidgetclustering/Assistant/cmds/C-1lim20分层API词袋和语义联合作特征下分层聚类算法下层次权重对比.txt
+
+######################### 1.选择本次的数据库
+A cb db_universal_set
+A cf lim20apkforest
+#-------------------------------------------------------------------
+######################### 2.打开项目
+A o UniversalSet_lim20_EvaluateXXXX.lim20fuse0001_raw_hierarch_vgg_if--m仅保留doc特征[实验C-1：lim20,分层API词袋和语义联合作特征下,分层聚类算法下,层次权重对比]
+
+######################### 3.DP
+# 已经提前处理过
+
+######################### 4.DT
+# DT run lim20
+
+######################### 5.IF
+IF extif cnn-vgg
+
+######################### 6.DE
+DE vector
+
+DE cutdim raw
+######################### 7.VC
+VC auto 0001
+
+######################### 8.OD
+OD run
+
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_lim20_EvaluateXXXX.lim20fuse1117_raw_hierarch_vgg_if--m其他几项完全相同仅doc逐渐减少[实验C-1：lim20,分层API词袋和语义联合作特征下,分层聚类算法下,层次权重对比]
+
+######################### 6.DE
+DE copy lim20fuse0001_raw_hierarch_vgg_if
+######################### 7.VC
+VC auto 1117
+
+######################### 8.OD
+OD run
+
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_lim20_EvaluateXXXX.lim20fuse2224_raw_hierarch_vgg_if--m其他几项完全相同仅doc逐渐减少[实验C-1：lim20,分层API词袋和语义联合作特征下,分层聚类算法下,层次权重对比]
+
+######################### 6.DE
+DE copy lim20fuse0001_raw_hierarch_vgg_if
+######################### 7.VC
+VC auto 2224
+
+######################### 8.OD
+OD run
+
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_lim20_EvaluateXXXX.lim20fuse3331_raw_hierarch_vgg_if--m其他几项完全相同仅doc逐渐减少[实验C-1：lim20,分层API词袋和语义联合作特征下,分层聚类算法下,层次权重对比]
+
+######################### 6.DE
+DE copy lim20fuse0001_raw_hierarch_vgg_if
+######################### 7.VC
+VC auto 3331
+######################### 8.OD
+OD run
+

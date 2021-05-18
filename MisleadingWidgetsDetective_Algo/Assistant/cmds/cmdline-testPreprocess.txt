@@ -1,0 +1,24 @@
+#尝试kpca降维到700,300,150的效果对比
+A o TestVisionProject
+######################### DP
+# 已经提前处理过
+
+A s hog_pca2_optics3_iforest
+######################### DT
+DT run
+
+######################### IF
+#IF extif spm #无码本
+IF extif hog
+
+######################### DE
+DE vector
+
+DE cutdim pca,2
+######################### VC
+VC run
+#VC eval
+######################### OD
+#OD run
+#OD eval
+    

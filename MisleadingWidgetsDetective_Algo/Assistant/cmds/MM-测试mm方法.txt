@@ -1,0 +1,25 @@
+#python Assistant/Interpreter.py  /home/dl/users/wangruifeng/05MisleadingWidgets/androidwidgetclustering/Assistant/cmds/MM-测试mm方法.txt
+A cb db_universal_set
+A cf pureapkforest
+
+A o dbUniversalSetPureapkforest_EvaluateMethods.vgg_puremethodapi_Sim_ifnewmm
+OD mm
+
+A o dbUniversalSetPureapkforest_EvaluateMethods.vgg_puremethodapi_Sim_ifnewmmdao
+OD mmdao
+
+A cf forforlimn
+A o UniversalSet_forforlimn_EvalCluster.fuse3331_raw_hierarch_vgg_ifnewmm
+OD mm
+
+A o UniversalSet_forforlimn_EvalCluster.fuse3331_raw_hierarch_vgg_ifnewmmdao
+OD mmdao
+
+
+A cf verycenteridfapilim20
+
+A o UniversalSet_verycenteridfapilim20_EvalAPI.fuse3340_raw_hierarch_vgg_ifnewmm
+OD mm
+
+A o UniversalSet_verycenteridfapilim20_EvalAPI.fuse3340_raw_hierarch_vgg_ifnewmmdao
+OD mmdao

@@ -1,0 +1,46 @@
+#[实验B-1：lim20,分层API词袋作特征下,分层聚类算法下,层次权重对比]
+#项目:UniversalSet_lim20_EvaluateXXX0
+#子任务:lim20fuse4420_raw_hierarch_vgg_if;lim20fuse4510_raw_hierarch_vgg_if;
+#运行命令:python Assistant/Interpreter.py /home/dl/users/wangruifeng/05MisleadingWidgets/androidwidgetclustering/Assistant/cmds/B-1lim20分层API词袋作特征下分层聚类算法下层次权重对比-Part2.txt
+
+######################### 1.选择本次的数据库
+A cb db_universal_set
+A cf lim20apkforest
+#-------------------------------------------------------------------
+######################### 2.打开项目
+A o UniversalSet_lim20_EvaluateXXX0.lim20fuse4420_raw_hierarch_vgg_if--m包和类权重大于方法[实验B-1：lim20,分层API词袋作特征下,分层聚类算法下,层次权重对比]
+
+######################### 6.DE
+DE copy lim20fuse3340_raw_hierarch_vgg_if
+######################### 7.VC
+VC auto 4420
+
+######################### 8.OD
+OD run
+
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_lim20_EvaluateXXX0.lim20fuse4510_raw_hierarch_vgg_if--m类和包最重要[实验B-1：lim20,分层API词袋作特征下,分层聚类算法下,层次权重对比]
+
+######################### 6.DE
+DE copy lim20fuse3340_raw_hierarch_vgg_if
+######################### 7.VC
+VC auto 4510
+
+######################### 8.OD
+OD run
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_lim20_EvaluateXXX0.lim20fuse1110_raw_hierarch_vgg_if--m去除doc后完全相同的权重[实验B-1：lim20,分层API词袋作特征下,分层聚类算法下,层次权重对比]
+
+######################### 6.DE
+DE copy lim20fuse3340_raw_hierarch_vgg_if
+######################### 7.VC
+VC auto 1110
+
+######################### 8.OD
+OD run
+   
+

@@ -1,0 +1,110 @@
+#[实验A:当前评价方法Sim]
+#项目:UniversalSet_forforlimn_EvalCluster
+#子任务:
+#运行命令:python Assistant/Interpreter.py /home/dl/users/wangruifeng/05MisleadingWidgets/androidwidgetclustering/Assistant/cmds/A-当前评价方法Fuse.txt
+
+#UniversalSet_forforlimn_EvalCluster.fuse1111_raw_hierarch_vgg_if--m对比不同因子的影响
+#UniversalSet_forforlimn_EvalCluster.fuse9999_raw_hierarch_spm_if--m对比不同因子的影响
+#UniversalSet_forforlimn_EvalCluster.fuse3331_raw_hierarch_vgg_if--m含doc的基准
+#UniversalSet_forforlimn_EvalCluster.fuse3340_raw_hierarch_vgg_if--m不含doc的基准
+#UniversalSet_forforlimn_EvalCluster.fuse4820_raw_hierarch_vgg_if--m尝试加大package和class的影响
+#UniversalSet_forforlimn_EvalCluster.fuse9910_raw_hierarch_vgg_if--m加大package和class的影响最大
+#UniversalSet_forforlimn_EvalCluster.fuse1190_raw_hierarch_vgg_if--m减小package和class的影响最小
+
+
+######################### 1.选择本次的数据库
+A cb db_universal_set
+A cf forforlimn
+#-------------------------------------------------------------------
+######################### 2.打开项目
+A o UniversalSet_forforlimn_EvalCluster.fuse3340_raw_hierarch_vgg_if--m不含doc的基准[实验A:当前评价方法Fuse]
+
+######################### 3.DP
+# 已经提前处理过
+# 记得将数据集换成原始的[ok]
+
+######################### 4.DT
+# DT run 已经生成
+
+######################### 5.IF
+#IF extif cnn-vgg 已经生成
+
+######################### 6.DE
+#DE vector
+
+#DE cutdim raw
+
+######################### 7.VC
+#VC auto 3340
+
+######################### 8.OD
+OD run
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_forforlimn_EvalCluster.fuse3331_raw_hierarch_vgg_if--m不含doc的基准[实验A:当前评价方法Fuse]
+
+DE copy fuse3340_raw_hierarch_vgg_if
+######################### 5.IF
+VC auto 3331
+
+######################### 8.OD
+OD run
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_forforlimn_EvalCluster.fuse4820_raw_hierarch_vgg_if--m尝试加大package和class的影响[实验A:当前评价方法Fuse]
+
+DE copy fuse3340_raw_hierarch_vgg_if
+######################### 5.IF
+VC auto 4820
+
+######################### 8.OD
+OD run
+
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_forforlimn_EvalCluster.fuse9910_raw_hierarch_vgg_if--m加大package和class的影响最大[实验A:当前评价方法Fuse]
+
+DE copy fuse3340_raw_hierarch_vgg_if
+######################### 5.IF
+VC auto 9910
+
+######################### 8.OD
+OD run
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_forforlimn_EvalCluster.fuse1190_raw_hierarch_vgg_if--m减小package和class的影响最小[实验A:当前评价方法Fuse]
+
+DE copy fuse3340_raw_hierarch_vgg_if
+######################### 5.IF
+VC auto 1190
+
+######################### 8.OD
+OD run
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_forforlimn_EvalCluster.fuse1111_raw_hierarch_vgg_if--m对比不同因子的影响[实验A:当前评价方法Fuse]
+
+DE copy fuse3340_raw_hierarch_vgg_if
+######################### 5.IF
+VC auto 1111
+
+######################### 8.OD
+OD run
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_forforlimn_EvalCluster.fuse9999_raw_hierarch_spm_if--m对比不同因子的影响[实验A:当前评价方法Fuse]
+
+DE copy fuse3340_raw_hierarch_vgg_if
+######################### 5.IF
+VC auto 9999
+
+######################### 8.OD
+OD run
+
+

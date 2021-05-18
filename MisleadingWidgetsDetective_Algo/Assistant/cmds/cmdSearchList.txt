@@ -1,0 +1,15 @@
+#首先是搜索参数流程：
+A o MisleadingWidget_tsne
+# DataPreprocess
+# DataTransform
+DT apktree csvsets
+# ImageFeatureExtract
+IF extif spm
+# DimensionEngineering
+DE vector
+#DE cutdim kpca,300
+DE cutdim tsne,3500
+#DE cutdim tsne,700
+#DE cutdim tsne,70
+# VectorCluster
+VC search -kpca-300

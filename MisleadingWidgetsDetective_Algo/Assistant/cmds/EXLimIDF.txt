@@ -1,0 +1,76 @@
+#[实验LimIDF:IDF方法引入lim]
+#项目:UniversalSet_centeridfapi_EvalAPI
+#子任务:
+#运行命令:python Assistant/Interpreter.py /home/dl/users/wangruifeng/05MisleadingWidgets/androidwidgetclustering/Assistant/cmds/EXLimIDF.txt
+
+######################### 1.选择本次的数据库
+A cb db_universal_set
+A cf smallerpureidfapilim20
+#-------------------------------------------------------------------
+######################### 2.打开项目
+A o UniversalSet_smallerpureidfapilim20_EvalAPI.fuse3331_raw_hierarch_vgg_if--m使用EXCEPT[实验LimIDF:IDF方法引入lim]
+
+
+######################### 6.DE
+# 需要将EXCEPT重新加上
+DT run apiidf-smallerlim20 
+
+DE vector
+
+DE cutdim raw 
+######################### 7.VC
+VC auto 3331
+
+IF extif cnn-vgg
+
+######################### 8.OD
+OD run
+
+
+
+
+######################### 1.选择本次的数据库
+
+A cf centerpureidfapilim20
+#-------------------------------------------------------------------
+######################### 2.打开项目
+A o UniversalSet_centerpureidfapilim20_EvalAPI.fuse3331_raw_hierarch_vgg_if--m使用EXCEPT[实验LimIDF:IDF方法引入lim]
+
+
+######################### 6.DE
+# 需要将EXCEPT重新加上
+DT run apiidf-centerlim20
+
+DE vector
+
+DE cutdim raw 
+######################### 7.VC
+VC auto 3331
+
+IF extif cnn-vgg
+
+######################### 8.OD
+OD run
+
+
+
+A cf verycenterpureidfapilim20
+#-------------------------------------------------------------------
+######################### 2.打开项目
+A o UniversalSet_verycenterpureidfapilim20_EvalAPI.fuse3331_raw_hierarch_vgg_if--m使用EXCEPT[实验LimIDF:IDF方法引入lim]
+
+
+######################### 6.DE
+# 需要将EXCEPT重新加上
+DT run apiidf-verycenterlim20
+
+DE vector
+
+DE cutdim raw 
+######################### 7.VC
+VC auto 3331
+
+IF extif cnn-vgg
+######################### 8.OD
+OD run
+

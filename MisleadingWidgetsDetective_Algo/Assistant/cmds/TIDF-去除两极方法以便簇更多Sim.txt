@@ -1,0 +1,115 @@
+#[实验TIDF:去除两极IDF以便簇更多]
+#项目:UniversalSet_centeridfapi_EvalAPI
+#子任务:
+#运行命令:python Assistant/Interpreter.py /home/dl/users/wangruifeng/05MisleadingWidgets/androidwidgetclustering/Assistant/cmds/TIDF-去除两极方法以便簇更多Sim.txt
+
+######################### 1.选择本次的数据库
+A cb db_universal_set
+A cf smalleridfapi 
+
+#-------------------------------------------------------------------
+######################### 2.打开项目
+#A o UniversalSet_smalleridfapi_EvalAPI.pureapi_raw_sim_vgg_if--m结合doc方法+IDF去除两极方法[实验TIDF:去除两极IDF以便簇更多]
+
+
+######################### 6.DE
+#DE mvector
+
+######################### 7.VC
+#VC sim 
+
+######################### 8.OD
+#OD run
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_smalleridfapi_EvalAPI.pureapi_raw_sim_hog_if--m结合doc方法+IDF去除两极方法[实验TIDF:去除两极IDF以便簇更多]--cUniversalSet_smalleridfapi_EvalAPI.pureapi_raw_sim_vgg_if
+
+IF extif hog
+
+######################### 8.OD
+OD run
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+#A o UniversalSet_smalleridfapi_EvalAPI.pureapi_raw_sim_spm_if--m结合doc方法+IDF去除两极方法[实验TIDF:去除两极IDF以便簇更多]--cUniversalSet_smalleridfapi_EvalAPI.pureapi_raw_sim_vgg_if
+
+#IF extif spm
+
+######################### 8.OD
+#OD run
+
+
+
+
+
+
+
+
+######################### 1.选择本次的数据库
+A cf centeridfapi
+#-------------------------------------------------------------------
+######################### 2.打开项目
+A o UniversalSet_centeridfapi_EvalAPI.pureapi_raw_sim_vgg_if--m结合doc方法+IDF去除两极方法[实验TIDF:去除两极IDF以便簇更多]
+
+
+######################### 6.DE
+DE mvector
+
+######################### 7.VC
+VC sim 
+
+######################### 8.OD
+OD run
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_centeridfapi_EvalAPI.pureapi_raw_sim_hog_if--m结合doc方法+IDF去除两极方法[实验TIDF:去除两极IDF以便簇更多]--cUniversalSet_centeridfapi_EvalAPI.pureapi_raw_sim_vgg_if
+
+IF extif hog
+
+######################### 8.OD
+OD run
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+#A o UniversalSet_centeridfapi_EvalAPI.pureapi_raw_sim_spm_if--m结合doc方法+IDF去除两极方法[实验TIDF:去除两极IDF以便簇更多]--cUniversalSet_centeridfapi_EvalAPI.pureapi_raw_sim_vgg_if
+
+#IF extif spm
+
+######################### 8.OD
+#OD run
+
+
+A cf verycenteridfapi
+#-------------------------------------------------------------------
+######################### 2.打开项目
+A o UniversalSet_verycenteridfapi_EvalAPI.pureapi_raw_sim_vgg_if--m结合doc方法+IDF去除两极方法[实验TIDF:去除两极IDF以便簇更多]
+
+
+######################### 6.DE
+DE mvector
+
+######################### 7.VC
+VC sim 
+
+######################### 8.OD
+OD run
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_verycenteridfapi_EvalAPI.pureapi_raw_sim_hog_if--m结合doc方法+IDF去除两极方法[实验TIDF:去除两极IDF以便簇更多]--cUniversalSet_verycenteridfapi_EvalAPI.pureapi_raw_sim_vgg_if
+
+IF extif hog
+
+######################### 8.OD
+OD run
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+#A o UniversalSet_verycenteridfapi_EvalAPI.pureapi_raw_sim_spm_if--m结合doc方法+IDF去除两极方法[实验TIDF:去除两极IDF以便簇更多]--cUniversalSet_verycenteridfapi_EvalAPI.pureapi_raw_sim_vgg_if
+
+#IF extif spm
+
+######################### 8.OD
+#OD run

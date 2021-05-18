@@ -1,0 +1,19 @@
+#一套完整流程：
+A o MisleadingWidget_pca
+# DataPreprocess
+# DataTransform
+#DT apktree csvsets
+# ImageFeatureExtract
+#IF extif spm
+# DimensionEngineering
+#DE vector  
+#DE cutdim pca,700
+#DE cutdim pca,300
+#DE cutdim pca,150
+#DE cutdim pca,70
+# VectorCluster
+VC runc -pca-300
+VC evalc ,100
+# OutlierDetect
+OD runo -spm
+OD evalo ,100

@@ -1,0 +1,1 @@
+python Assistant/Interpreter.py PATH_TO_PROJECT_ROOT/cmds/cmdline-afterPreprocess.txt

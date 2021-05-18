@@ -1,0 +1,127 @@
+view_3c561a0409fc2ea64de5ea0c80fe0b8e.png
+[([[36, 42], [108, 42], [108, 114], [36, 114]], '=', 0.8232026100158691)]
+view_3c62f950dfe5a3b38f57532fd5c3d9e5.png
+[([[0, 76], [365, 76], [365, 305], [0, 305]], '-17', 0.5569747686386108)]
+view_3c6810045d2cbb14533f99223d9a379c.png
+[([[0, 27], [31, 27], [31, 60], [0, 60]], 'a:', 0.16473376750946045)]
+view_3c9da8fdd9e884323150e16ff2b1d2c4.png
+[([[0, 41], [438, 41], [438, 214], [0, 214]], '22:55', 0.5269176363945007)]
+view_3ce096c75172bb12bc2c9bae21de2a26.png
+[]
+view_3cee3d41cf42711eda8f9304588eadfc.png
+[]
+view_3d30d1c286f18b956903439dfa84c484.png
+[]
+view_3d8c722a35db5edb098cf5d9f39ab0d8.png
+[([[127, 121], [229, 121], [229, 163], [127, 163]], 'More', 0.5718653798103333)]
+view_3e88a3a99b8cf04353c80c953dcbb38d.png
+[([[124, 126], [256, 126], [256, 174], [124, 174]], 'Weeks', 0.9628400802612305)]
+view_3eb1c7df278c46060f91932e182cfc18.png
+[([[42, 50], [227, 50], [227, 95], [42, 95]], 'RANDOM', 0.963064968585968)]
+view_3eeb214ece2d1f76bba0db3978e7246e.png
+[([[37, 39], [197, 39], [197, 99], [37, 99]], 'Time:', 0.8585431575775146), ([[78, 112], [146, 112], [146, 168], [78, 168]], '61', 0.7646589875221252)]
+view_3f6adc786346c113b236065fe7f457fc.png
+[]
+view_4a1030eea495bcd57615f9ab795322a7.png
+[([[8, 0], [44, 0], [44, 48], [8, 48]], '+', 0.5450665950775146)]
+view_4b1494d7a7c34e92b6e13e00abeab862.png
+[([[122, 126], [254, 126], [254, 174], [122, 174]], 'clients', 0.9549899101257324)]
+view_4d53fb6e03e464619029ba18872a8774.png
+[([[25, 22], [204, 22], [204, 75], [25, 75]], 'TRVII.', 0.02160939760506153)]
+view_4f3bfd2c2445e93b4e19fc9a90c29c15.png
+[([[26, 32], [58, 32], [58, 58], [26, 58]], '15', 0.9686369299888611)]
+view_4f7a04d575274c1481dbbeb7dd94dfe1.png
+[([[54, 0], [112, 0], [112, 50], [54, 50]], '$5', 0.4889250695705414)]
+view_4f7ba3a89e52793167224517ef8bdbb7.png
+[]
+Namespace(cls_batch_num=30, cls_image_shape='3, 48, 192', cls_model_dir='/home/dl/.paddleocr/2.0/cls', cls_thresh=0.9, det=True, det_algorithm='DB', det_db_box_thresh=0.5, det_db_thresh=0.3, det_db_unclip_ratio=2.0, det_east_cover_thresh=0.1, det_east_nms_thresh=0.2, det_east_score_thresh=0.8, det_limit_side_len=960, det_limit_type='max', det_model_dir='/home/dl/.paddleocr/2.0/det', drop_score=0.5, enable_mkldnn=False, gpu_mem=8000, image_dir='', ir_optim=True, label_list=['0', '180'], lang='en', max_text_length=25, rec=True, rec_algorithm='CRNN', rec_batch_num=30, rec_char_dict_path='./ppocr/utils/dict/en_dict.txt', rec_char_type='ch', rec_image_shape='3, 32, 320', rec_model_dir='/home/dl/.paddleocr/2.0/rec/en', use_angle_cls=True, use_gpu=True, use_pdserving=False, use_space_char=True, use_tensorrt=False, use_zero_copy_run=False)
+view_3c561a0409fc2ea64de5ea0c80fe0b8e.png
+[2021/03/15 17:10:39] root INFO: dt_boxes num : 1, elapse : 2.5079519748687744
+[2021/03/15 17:10:39] root INFO: cls num  : 1, elapse : 0.005405902862548828
+[2021/03/15 17:10:39] root INFO: rec_res num  : 1, elapse : 0.0062656402587890625
+[]
+view_3c62f950dfe5a3b38f57532fd5c3d9e5.png
+[2021/03/15 17:10:39] root INFO: dt_boxes num : 1, elapse : 0.011668920516967773
+[2021/03/15 17:10:39] root INFO: cls num  : 1, elapse : 0.0032219886779785156
+[2021/03/15 17:10:39] root INFO: rec_res num  : 1, elapse : 0.0068264007568359375
+[]
+view_3c6810045d2cbb14533f99223d9a379c.png
+[2021/03/15 17:10:39] root INFO: dt_boxes num : 1, elapse : 0.011086463928222656
+[2021/03/15 17:10:39] root INFO: cls num  : 1, elapse : 0.0033402442932128906
+[2021/03/15 17:10:39] root INFO: rec_res num  : 1, elapse : 0.004334211349487305
+[]
+view_3c9da8fdd9e884323150e16ff2b1d2c4.png
+[2021/03/15 17:10:39] root INFO: dt_boxes num : 2, elapse : 0.02430438995361328
+[2021/03/15 17:10:39] root INFO: cls num  : 2, elapse : 0.003031492233276367
+[2021/03/15 17:10:39] root INFO: rec_res num  : 2, elapse : 0.006845235824584961
+[[[[197.0, 16.0], [437.0, 13.0], [437.0, 237.0], [200.0, 239.0]], ('155', 0.6824729)]]
+view_3ce096c75172bb12bc2c9bae21de2a26.png
+[2021/03/15 17:10:39] root INFO: dt_boxes num : 1, elapse : 0.010862588882446289
+[2021/03/15 17:10:39] root INFO: cls num  : 1, elapse : 0.003108978271484375
+[2021/03/15 17:10:39] root INFO: rec_res num  : 1, elapse : 0.004365444183349609
+[]
+view_3cee3d41cf42711eda8f9304588eadfc.png
+[2021/03/15 17:10:39] root INFO: dt_boxes num : 1, elapse : 0.009941577911376953
+[2021/03/15 17:10:39] root INFO: cls num  : 1, elapse : 0.0027112960815429688
+[2021/03/15 17:10:39] root INFO: rec_res num  : 1, elapse : 0.005217552185058594
+[]
+view_3d30d1c286f18b956903439dfa84c484.png
+[2021/03/15 17:10:39] root INFO: dt_boxes num : 0, elapse : 0.010892629623413086
+[2021/03/15 17:10:39] root INFO: cls num  : 0, elapse : 0
+[2021/03/15 17:10:39] root INFO: rec_res num  : 0, elapse : 0
+[]
+view_3d8c722a35db5edb098cf5d9f39ab0d8.png
+[2021/03/15 17:10:39] root INFO: dt_boxes num : 1, elapse : 0.019882678985595703
+[2021/03/15 17:10:39] root INFO: cls num  : 1, elapse : 0.0022335052490234375
+[2021/03/15 17:10:39] root INFO: rec_res num  : 1, elapse : 0.007632017135620117
+[[[[128.0, 125.0], [225.0, 127.0], [224.0, 160.0], [127.0, 157.0]], ('More', 0.9996024)]]
+view_3e88a3a99b8cf04353c80c953dcbb38d.png
+[2021/03/15 17:10:39] root INFO: dt_boxes num : 1, elapse : 0.0184326171875
+[2021/03/15 17:10:39] root INFO: cls num  : 1, elapse : 0.0024433135986328125
+[2021/03/15 17:10:39] root INFO: rec_res num  : 1, elapse : 0.007497549057006836
+[[[[127.0, 133.0], [249.0, 134.0], [249.0, 167.0], [126.0, 166.0]], ('Weeks', 0.99714184)]]
+view_3eb1c7df278c46060f91932e182cfc18.png
+[2021/03/15 17:10:39] root INFO: dt_boxes num : 1, elapse : 0.012268543243408203
+[2021/03/15 17:10:39] root INFO: cls num  : 1, elapse : 0.0022041797637939453
+[2021/03/15 17:10:39] root INFO: rec_res num  : 1, elapse : 0.004502058029174805
+[[[[44.0, 55.0], [237.0, 55.0], [237.0, 92.0], [44.0, 91.0]], ('RANDOM', 0.99550176)]]
+view_3eeb214ece2d1f76bba0db3978e7246e.png
+[2021/03/15 17:10:39] root INFO: dt_boxes num : 2, elapse : 0.008433341979980469
+[2021/03/15 17:10:39] root INFO: cls num  : 2, elapse : 0.002205371856689453
+[2021/03/15 17:10:39] root INFO: rec_res num  : 2, elapse : 0.003632068634033203
+[[[[41.0, 40.0], [192.0, 49.0], [189.0, 98.0], [38.0, 89.0]], ('Timer', 0.8668868)], [[[78.0, 113.0], [143.0, 110.0], [145.0, 163.0], [81.0, 166.0]], ('61', 0.7114503)]]
+view_3f6adc786346c113b236065fe7f457fc.png
+[2021/03/15 17:10:39] root INFO: dt_boxes num : 1, elapse : 0.009482860565185547
+[2021/03/15 17:10:39] root INFO: cls num  : 1, elapse : 0.0032186508178710938
+[2021/03/15 17:10:39] root INFO: rec_res num  : 1, elapse : 0.004301786422729492
+[]
+view_4a1030eea495bcd57615f9ab795322a7.png
+[2021/03/15 17:10:39] root INFO: dt_boxes num : 1, elapse : 0.011064291000366211
+[2021/03/15 17:10:39] root INFO: cls num  : 1, elapse : 0.003202199935913086
+[2021/03/15 17:10:39] root INFO: rec_res num  : 1, elapse : 0.006868839263916016
+[]
+view_4b1494d7a7c34e92b6e13e00abeab862.png
+[2021/03/15 17:10:39] root INFO: dt_boxes num : 2, elapse : 0.01934075355529785
+[2021/03/15 17:10:39] root INFO: cls num  : 2, elapse : 0.0041561126708984375
+[2021/03/15 17:10:39] root INFO: rec_res num  : 2, elapse : 0.008150339126586914
+[[[[147.0, 29.0], [233.0, 31.0], [231.0, 112.0], [145.0, 110.0]], ('S', 0.5439087)], [[[130.0, 133.0], [250.0, 134.0], [249.0, 168.0], [130.0, 166.0]], ('clients', 0.9319598)]]
+view_4d53fb6e03e464619029ba18872a8774.png
+[2021/03/15 17:10:39] root INFO: dt_boxes num : 1, elapse : 0.024580717086791992
+[2021/03/15 17:10:39] root INFO: cls num  : 1, elapse : 0.003520488739013672
+[2021/03/15 17:10:40] root INFO: rec_res num  : 1, elapse : 0.007819414138793945
+[[[[18.0, 18.0], [206.0, 18.0], [206.0, 81.0], [18.0, 81.0]], ('TRATEL', 0.769777)]]
+view_4f3bfd2c2445e93b4e19fc9a90c29c15.png
+[2021/03/15 17:10:40] root INFO: dt_boxes num : 2, elapse : 0.011329889297485352
+[2021/03/15 17:10:40] root INFO: cls num  : 2, elapse : 0.0029921531677246094
+[2021/03/15 17:10:40] root INFO: rec_res num  : 2, elapse : 0.006880044937133789
+[[[[28.0, 33.0], [57.0, 33.0], [57.0, 58.0], [28.0, 58.0]], ('15', 0.9203204)]]
+view_4f7a04d575274c1481dbbeb7dd94dfe1.png
+[2021/03/15 17:10:40] root INFO: dt_boxes num : 1, elapse : 0.03488039970397949
+[2021/03/15 17:10:40] root INFO: cls num  : 1, elapse : 0.004493236541748047
+[2021/03/15 17:10:40] root INFO: rec_res num  : 1, elapse : 0.004147768020629883
+[[[[50.0, 0.0], [116.0, 0.0], [118.0, 55.0], [52.0, 56.0]], ('55', 0.6618634)]]
+view_4f7ba3a89e52793167224517ef8bdbb7.png
+[2021/03/15 17:10:40] root INFO: dt_boxes num : 0, elapse : 0.031485795974731445
+[2021/03/15 17:10:40] root INFO: cls num  : 0, elapse : 0
+[2021/03/15 17:10:40] root INFO: rec_res num  : 0, elapse : 0
+[]

@@ -1,0 +1,93 @@
+#[实验TIDF:去除两极IDF以便簇更多]
+#项目:UniversalSet_centeridfapi_EvalAPI
+#子任务:
+#运行命令:python Assistant/Interpreter.py /home/dl/users/wangruifeng/05MisleadingWidgets/androidwidgetclustering/Assistant/cmds/TIDF-去除两极方法以便簇更多.txt
+
+
+######################### 1.选择本次的数据库
+A cb db_universal_set
+A cf centeridfapi
+#-------------------------------------------------------------------
+######################### 2.打开项目
+A o UniversalSet_centeridfapi_EvalAPI.fuse3331_raw_hierarch_vgg_if--m结合doc方法+IDF去除两极方法[实验TIDF:去除两极IDF以便簇更多]
+
+
+######################### 6.DE
+DT run apiidf-center
+
+DE vector
+
+DE cutdim raw 
+######################### 7.VC
+VC auto 3331
+
+IF extif cnn-vgg
+
+######################### 8.OD
+OD run
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_centeridfapi_EvalAPI.fuse3340_raw_hierarch_vgg_if--m合理API层级+IDF去除两极方法[实验TIDF:去除两极IDF以便簇更多]
+
+DE copy fuse3331_raw_hierarch_vgg_if
+######################### 5.IF
+VC auto 3340
+
+######################### 8.OD
+OD run
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_centeridfapi_EvalAPI.fuse1111_raw_hierarch_vgg_if--m结合doc方法+IDF去除两极方法[实验TIDF:去除两极IDF以便簇更多]
+
+DE copy fuse3331_raw_hierarch_vgg_if
+######################### 5.IF
+VC auto 1111
+
+######################### 8.OD
+OD run
+
+
+
+A cf verycenteridfapi
+#-------------------------------------------------------------------
+######################### 2.打开项目
+A o UniversalSet_verycenteridfapi_EvalAPI.fuse3331_raw_hierarch_vgg_if--m结合doc方法+IDF去除两极方法[实验TIDF:去除两极IDF以便簇更多]
+
+
+######################### 6.DE
+DT run apiidf-verycenter
+
+DE vector
+
+DE cutdim raw 
+######################### 7.VC
+VC auto 3331
+
+IF extif cnn-vgg
+######################### 8.OD
+OD run
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_verycenteridfapi_EvalAPI.fuse3340_raw_hierarch_vgg_if--m合理API层级+IDF去除两极方法[实验TIDF:去除两极IDF以便簇更多]
+
+DE copy fuse3331_raw_hierarch_vgg_if
+######################### 5.IF
+VC auto 3340
+
+######################### 8.OD
+OD run
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_verycenteridfapi_EvalAPI.fuse1111_raw_hierarch_vgg_if--m结合doc方法+IDF去除两极方法[实验TIDF:去除两极IDF以便簇更多]
+
+DE copy fuse3331_raw_hierarch_vgg_if
+######################### 5.IF
+VC auto 1111
+
+######################### 8.OD
+OD run
+

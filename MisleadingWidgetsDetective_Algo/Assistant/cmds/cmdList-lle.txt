@@ -1,0 +1,22 @@
+#尝试kpca降维到700,300,150的效果对比
+A o MW_pca.spm_pca300_optics3
+######################### DP
+# 已经提前处理过
+
+######################### DT数据库级
+#DT apktree csvsets
+
+######################### IF文档集级
+#IF extif spm
+#IF usedefault
+
+######################### DE文档集级
+#DE vector  
+
+#DE cutdim pca,300
+######################### VC
+#VC run
+#VC eval
+######################### OD
+#OD run
+OD eval

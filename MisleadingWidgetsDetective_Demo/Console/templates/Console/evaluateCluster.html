@@ -1,0 +1,839 @@
+﻿<!--  最常用的，要给别人看得 evaluateCluster.html`-->
+<!--查看详细簇的html,目前需要显示API -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <!-- Bootstrap Styles-->
+    <link href="{{staticPath}}/css/bootstrap.css" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <!--<link href="{{staticPath}}/css/font-awesome.css" rel="stylesheet" />-->
+    <link rel="stylesheet" href="http://libs.baidu.com/fontawesome/4.0.3/css/font-awesome.min.css">
+    <!-- Custom Styles-->
+    <!-- Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <title>Outliers Preview</title>
+
+    <link href="{{staticPath}}/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <style>
+    .appcolor0{
+		background: orangered;
+    }
+    .appcolor1{
+		background: Aquamarine;
+    }
+    .appcolor2{
+		background: gold;
+    }
+    .appcolor3{
+		background: DeepSkyBlue;
+    }
+    .appcolor4{
+		background: darkorange; 
+    }
+    .appcolor5{
+		background: darkcyan;
+    }
+    .appcolor6{
+		background: BlueViolet;
+    }
+    .inspected{
+		font-size: 16px;
+		text-overflow: ellipsis;
+		overflow: hidden;/* 超出的文本隐藏 */
+		padding-top:0px;
+		z-index:-1;
+        font-weight: 40;
+        text-decoration:line-through;
+        
+    }
+	.button_text{
+		font-size: 16px;
+		text-overflow: ellipsis;
+		overflow: hidden;/* 超出的文本隐藏 */
+		padding-top:0px;
+		z-index:-1;
+	}
+	.outer{
+	    width: 224px;
+	    height: 258px;
+	    position: relative;
+	    margin-right: 30px;
+	    margin-bottom: 30px;
+	}
+	.outer_with_api_smi{
+	    width: 224px;
+	    height: 350px;
+	    position: relative;
+	    margin-right: 30px;
+	    margin-bottom: 30px;
+	}
+	.outer_with_api{
+	    width: 224px;
+	    height: 400px;
+	    position: relative;
+	    margin-right: 30px;
+	    margin-bottom: 30px;
+	}
+	.center{
+	    width:200px;
+	    height: 34px;
+	    margin-left: 10px;
+	    margin-right: 10px;
+	    position: absolute;
+	    border-radius: 0px;
+	    z-index:1;
+	}
+	.apiType{
+	    font-size: 13px;
+	    width:224px;
+	    height: 142px;
+	    margin-top: 50px;
+	    margin-bottom: 100px;
+	    position: absolute;
+	    text-align:center;
+	    /*white-space: nowrap;*/
+	    overflow:auto;
+	    text-overflow: ellipsis;
+	}
+	.apiContent{
+	    font-size: 13px;
+	    width:224px;
+	    height: 34px;
+	    margin-top: 100px;
+	    position: absolute;
+	    text-align:center;
+	}
+	.hidden{
+		display:none;
+	}
+	.totalhidden{
+		display:none;
+	}
+        .outlier{
+	   /*border:2px solid #C3464F;*/
+	}
+    .topoutlier{
+	   border:5px solid #C3464F;
+	}
+        .hightlight{
+	   border:5px solid #FFCC00;
+	}
+    	input[type=range]:first-of-type {
+          width: 650px;
+        }
+        #one {
+                transform: rotate(90deg);
+                -ms-transform: rotate(90deg); /* IE 9 */
+                -moz-transform: rotate(90deg); /* Firefox */
+                -webkit-transform: rotate(90deg); /* Safari and Chrome */
+                -o-transform: rotate(90deg); /* Opera */
+        }
+    .isotopeSelect{
+        margin-bottom:60px;
+        padding-left:0px;
+    }
+    .suspect{
+      color: red;
+    }
+    .notsuspect{
+
+    }
+    .covered{
+      background:#99FF00;
+    }
+    .to_cover{
+      background:#CCFFFF;
+    }
+    .top20p{
+      /*background:yellow;*/
+    }
+    .detected{
+	   border:5px solid red;
+       border-radius:10px;
+    }
+    .detected_nodisplay{
+    }
+    .cod_advise-1{
+	   border:5px solid black;
+       border-radius:10px;
+    }
+    </style>
+
+
+</head>
+
+<body>
+                <div class="">
+                    <div class="col-md-12">
+                        <h1 class="" style="text-align:center;">
+				Outliers Preview
+                        </h1>
+      				<h1 style="text-align:center;margin-bottom:30px;"><small>{{current_db}}: {{metadata.project_name}}.{{metadata.subtask_name}} &nbsp; {{origin_cluster_nums}} origin clusters total, {{show_cluster_nums}} good shows, total {{total_cluster_nums}} can show</small></h1>
+      				<h1 style="text-align:center;margin-bottom:30px;"><small>按钮颜色：所属app；中划线：已经考察过；背景：绿色已经cover；颜色待cover</small></h1>
+
+			<hr/>
+                    </div>
+                </div>
+
+
+                <div class="row panel"  style="padding-bottom:50px;">
+		<section id="page-content" class="index-page ">
+
+			<input type="range" value="0" min="-1" max="{{show_cluster_nums}}" id="one" style="position: fixed;bottom:40%;right:-13%;" />
+			<div id="uno" style="position: fixed;bottom:4.5%;right:3.7%;">*&nbsp;</div>
+      <button id="before" class="btn btn-default" style="position: fixed;bottom:0%;right:33.7%;z-index:2;">上一页</button>
+      <button id="allselect" class="btn btn-success" style="position: fixed;bottom:0%;right:23.7%;z-index:2;">本簇全选</button>
+      <button id="next" class="btn btn-default" style="position: fixed;bottom:0%;right:13.7%;z-index:2;">下一页</button>
+      <button id="nextToCovered" class="btn btn-default" style="position: fixed;bottom:0%;right:3.7%;z-index:2;">下一tocover</button>
+			<div id="changeApiShow" style="position:fixed; top:16%;right:3.6%;font-size: 25px;"><i id="showIcon" class="fa fa-th-large"></i> </div>
+
+			<section class="box-content box-1">
+				<div class="container" style="width:100%;height:1000px;">
+					<div class="heading wow" style="margin-bottom: 0px;">
+					<div class="row" style="margin-bottom: 30px;">
+					  <div class="col-md-8 col-md-offset-2">
+					    <div class="input-group" >
+					      <input type="text" class="form-control" style="margin-top:15px;" placeholder="Search for..." id="searchFilter">
+					      <span class="input-group-btn" >
+						<button class="btn btn-default" style="margin-top:15px;margin-left:5px;border-radius:0px;width:100px;" id='search' type="button">Find Clusters</button>
+					      </span>
+                        <span class="input-group-btn" >
+                          <button id='exportCSV' class="btn btn-info" style="margin-top:15px;margin-left:5px;border-radius:0px;" type="button">Export Suspects</button>
+                          <!--<button id='exportInfo' class="btn btn-success" style="margin-top:15px;margin-left:5px;border-radius:0px;" type="button">Export Basic Info</button>-->
+                        </span>
+                        <!--
+                        <span class="input-group-btn" >
+                          <button id='clearSuspects' class="btn btn-warning" style="margin-top:15px;margin-left:5px;border-radius:0px;" type="button">Clear Suspects</button>
+                        </span>
+                        -->
+                        <span class="input-group-btn" style="width:20%;">
+                        <select class="form-control" id="misleadingdisplay" style="margin-top:15px;margin-left:5px;border-radius:5px;">
+                            <option selected="selected" >--Misleading Display--</option>
+                            <option value='top1'>Top 1</option>
+                            <option value='top3'>Top 3</option>
+                            <option value='top5'>Top 5</option>
+                            <option value='top20p'>Top 20%</option>
+                            <option value='threshold'>Threshold</option>
+                            <option value='openpass'>OpenPass</option>
+                        </select>
+                        </span>
+                        
+                        <span class="input-group-btn" style="width:20%;">
+                        <!-- <span class="input-group-btn" style="width:20%;"> -->
+						    <!--<button id='autoSuspects' class="btn btn-default" style="margin-top:15px;margin-left:5px;border-radius:0px;width:100px;" id='search' type="button">Auto Suspects</button> -->
+
+                              <button type="button" class="btn btn-success dropdown-toggle" style="margin-top:15px;margin-left:5px;border-radius:0px;width:150px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                More <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu">
+                                <li><a id='autoSuspects' explain="自动导出有嫌疑的控件,目前按20%">Auto Suspects</a></li>
+                                <li><a id='exportInfo' explain="导出基本信息,仅用于控件统计,低频">Export Basic Info</a></li>
+                                <li><a id='clearSuspects' explain="清除有嫌疑的控件,低频">Clear Suspects</a></li>
+                                <li role="separator" class="divider"></li>
+                                <!--e.g.:needcover-UniversalSet_lim20_EvaluateXXX0.lim20fuse1110_raw_hierarch_vgg_if.csv-->
+                                <li><a id='downloadCoverList' explain="下载当前的CoverList" href="{{picturePath}}{{cover_icon_csv_path}}{{metadata.project_name}}.{{metadata.subtask_name}}.csv">Download CoverList</a></li>
+                                <li><a id='taggleDisplayDetected' explain="切换显示推荐异常控件" >Taggle Display Detected(20%)</a></li>
+                                <li><a id='taggleDisplayGlobal20p' explain="显示全局20%异常控件" >Taggle Display Global(20%)</a></li>
+                              </ul>
+                        </span>
+					    </div>
+					  </div>
+					</div>
+
+					<div name="图片总容器" class="isotopeTotal col-lg-10 col-sm-10 col-md-10 col-md-offset-1">
+					{% for info in apkInfoTree_good %}
+    						<div class="isotopeSelect col-lg-2 col-sm-2 col-md-2   outer C{{info.1.good_cluster_no}} {{info.0.covered}}">
+                    <p style="text-align:center;" >RC{{info.1.cluster_no}} O{{info.1.outlier_score}} S{{info.1.outlier_sort}}</p>
+      							<img src="{{picturePath}}{{BaseDir}}{{info.0.path}}" class="{{info.1.isOutlier}} {{info.1.hightlight}} imageinfo cod_advise{{info.1.outlier_advise}}" alt="" style="padding-left:4px;margin: auto;width: 220px;" app='{{info.0.app}}' sort='{{info.1.outlier_sort}}' score='{{info.1.outlier_score}}' percent_sort="{{info.1.outlier_percent_sort}}" global_sort="{{info.1.global_outlier_sort}}" global_sort_ratio="{{info.1.global_outlier_sort_ratio}}">
+                                <!--{{info.0.suspect} ==> abadon}-->
+      							<button type="button" class="btn btn-default center markAsSuspect notsuspect  {{info.0.top20p}} appcolor{{info.1.color_index_in_cluster}}"  data-toggle="tooltip" data-placement="bottom" title="Click to mark as suspect:{{info.0.app}}" comment=''>
+                                  <p class="info" style="opacity:0;font-size:0px;display:none;" raw_id="{{info.1.id}}" app="{{info.0.app}}" widget="{{info.0.widget}}" appwebsite="{{info.1.appwebsite}}" iconaddr="{{picturePath}}{{BaseDir}}{{info.0.path}}"
+                                  clusteraddress="{{info.1.good_cluster_no}}" realclusteraddress="{{info.1.cluster_no}}"  api="{{info.0.api_string}}"></p>
+                                  <p class="{{info.0.inspected}} ">{{info.0.app}}</p>
+                      <!-- data-clipboard-target="#C{{info.0.widget}}" -->
+                    </button>
+      							<p style="opacity:0;font-size:0px;" id="C{{info.0.widget}}">{{BaseDir}}{{info.0.app}}</p>
+
+      							<div class="apiType hidden" >
+      								{% for typeItem in info.0.api_type %}
+      								  <p>{{typeItem}}</p>
+      								{% endfor %}
+      							</div>
+      						<!--<div class="apiContent hidden" >
+      							<ul type='square'>
+      							{% for apiItem in info.0.api %}
+      							<li>{{apiItem}}</li>
+      							{% endfor %}
+      							<ul>
+      						</div>-->
+    						</div>
+					{% endfor %}
+					</div>
+				</div>
+
+			</section>
+
+	<script type="text/javascript" src="{{staticPath}}/js/jquery-1.10.2.js"></script>
+    <script src="{{staticPath}}/js/jquery.metisMenu.js"></script>
+
+    <script src="{{staticPath}}/js/bootstrap.min.js"></script>
+    <!-- Custom Js -->
+
+	<!--<div id="page-top"><a href="#page-top" class="btn btn-toTop"><i class="fa fa-angle-double-up"></i></a></div>-->
+	<!-- ========== Scripts ========== -->
+	<script type="text/javascript" src="{{staticPath}}/gallery-js/jquery.scrollTo.min.js"></script>
+	<script type="text/javascript" src="{{staticPath}}/gallery-js/isotope.pkgd.min.js"></script>
+  <script src="{{staticPath}}/js/json2csv.js" type="text/javascript" charset="utf-8"></script>
+  <!-- <script type="text/javascript" src="{{staticPath}}/clipboard.js-master/dist/clipboard.min.js"></script> -->
+	<!-- Definity JS -->
+	<script type="text/javascript">
+		console.log('reday')
+		window.apiShowStatus = 0
+		window.averAPIs = {{averAPIs}}
+        window.myWidgets = new Array();
+        window.suspects = new String()
+        window.to_covered = ''
+        window.to_covered_index = 0
+
+		$(document).ready(function () {
+			function filter(filterValue){
+				$('.isotopeSelect').addClass('totalhidden')
+				console.log('filtering',filterValue)
+				$(filterValue).removeClass('totalhidden')
+				console.log(filterValue,'done')
+			}
+			// 如果hightlight，选hightlight所在簇
+			hightlightCluster = ("{{hightlightCluster}}").toString()
+			if (hightlightCluster != '')filter('.C'+hightlightCluster)
+
+      current_cluster_no = ("{{cluster_no}}").toString()
+      console.log('current_cluster_no',current_cluster_no)
+      if (current_cluster_no !=''){
+        $('#uno').html(current_cluster_no)
+        filterValue = '.C' + current_cluster_no
+        filter(filterValue)
+      }
+
+		$('#one').bind('input ',function(){
+			console.log('input!')
+			$('#uno').html($(this).val())
+			filterValue = '.C' + $(this).val()
+			filter(filterValue)
+		})
+
+      $('#allselect').click(function(){
+        // select all widget ,into the window.myWidgets
+           $('.isotopeSelect').not('.totalhidden').each(function(){
+            $(this).find('button').each(markSuspects)
+           })
+        
+      })
+      function before_action(){
+        current_cluster_no = $('#uno').html()
+        if(current_cluster_no == '*'){
+          current_cluster_no = 1
+        }else{
+          current_cluster_no = parseInt(current_cluster_no) -1
+        }
+        $('#uno').html(current_cluster_no)
+        filterValue = '.C' + current_cluster_no
+        filter(filterValue)
+        $('#one').val(current_cluster_no)
+      }
+      $('#before').click(before_action);
+
+      function next_action(){
+        current_cluster_no = $('#uno').html()
+        if(current_cluster_no == '*'){
+          current_cluster_no = 1
+        }else{
+          current_cluster_no = parseInt(current_cluster_no) +1
+        }
+        $('#uno').html(current_cluster_no)
+        filterValue = '.C' + current_cluster_no
+        filter(filterValue)
+        $('#one').val(current_cluster_no)
+      }
+      $('#next').click(next_action);
+        
+      function search_action(){
+      	console.log('click!')
+      	var filterValue = $('#searchFilter').val();
+        current_cluster_no = filterValue
+      	if(filterValue == "*"){
+      		filterValue = '.isotopeSelect'
+      	}else{
+      		filterValue = '.C' + $('#searchFilter').val();
+      	}
+      	filter(filterValue)
+        $('#uno').html(current_cluster_no)
+        $('#one').val(current_cluster_no)
+      
+      }
+      $('#search').click(search_action);
+      
+       $('#changeApiShow').click(function () {
+               console.log('change api show!')
+           // 是0则当前正常，按下后显示类型 fa-th-large
+           if (window.apiShowStatus == 0){
+               $('.apiType').removeClass('hidden')
+               $('.outer').removeClass('outer').addClass('outer_with_api')
+               $('#showIcon').removeClass('fa-th-large').addClass('fa-th-list')
+               window.apiShowStatus = 1
+           }
+           // 是1则当前仅显示类型，按下后显示具体内容 fa-th-list
+           //else if (window.apiShowStatus == 1){
+           //	$('.apiContent').removeClass('totalhidden')
+           //	$('#showIcon').removeClass('fa-th-list').addClass('fa-list')
+           //	window.apiShowStatus = 2
+           //}
+           // 是2则当前全部显示，按下后还原 fa-list
+           else if (window.apiShowStatus == 1){
+               //$('.apiContent').addClass('totalhidden')
+               $('.apiType').addClass('hidden')
+               $('.outer_with_api').removeClass('outer_with_api_smi').removeClass('outer_with_api').addClass('outer')
+               //$('#showIcon').removeClass('fa-list').addClass('fa-th-large')
+               $('#showIcon').removeClass('fa-th-list').addClass('fa-th-large')
+               window.apiShowStatus = 0
+           }else{}
+       });
+
+      $('.imageinfo').click(function () {
+        console.log('simple info')
+        infoobject = $(this).next().children('.info')
+          var clusteraddress = 'C'+infoobject.attr('clusteraddress')+' RC'+infoobject.attr('realclusteraddress')
+          var clusterlinkIndex = window.location.href.lastIndexOf("\/")
+          var clusterlink = window.location.href.substring(0,clusterlinkIndex)+'/'+infoobject.attr('clusteraddress')
+          var newSuspect =
+            {
+             'appwebsite':infoobject.attr('appwebsite'),
+             'app':infoobject.attr('app'),
+             'clusteraddress':clusteraddress,
+           }
+        
+        //info =JSON.stringify(newSuspect) 
+        // use prompt to get th comment
+        comment = prompt('app:'+infoobject.attr('app')+' 可以在下面评论,使用All:xxx可以将评论广播到本簇','当前comment:'+$(this).next().attr('comment'));
+        if(comment.indexOf('All:') >= 0){
+           $('.isotopeSelect').not('.totalhidden').each(function(){
+            $(this).find('button').attr('comment',comment.replace('All:',''))
+           })
+        }
+        else{
+            $(this).next().attr('comment',comment)
+        }
+      })
+
+
+    $('#nextToCovered').click(function(){
+        if (window.to_covered == ''){
+            window.to_covered = new Array();
+            window.to_covered_index = 0
+            $('.to_cover').each(function(){
+               //get their cluster_no
+               window.to_covered.push( $(this).children(".btn").children(".info").attr('clusteraddress') )
+               // first store in window.to_cover
+            })
+            $('.covered').each(function(){
+               //get their cluster_no
+               window.to_covered.push( $(this).children(".btn").children(".info").attr('clusteraddress') )
+               // first store in window.to_cover
+            })
+        }
+        console.log('nexttocovered!',window.to_covered)
+        if (window.to_covered_index == window.to_covered.length) window.to_covered_index = 0
+            
+        console.log('window.to_covered_index',window.to_covered_index)
+        console.log('window.to_covered[index]',window.to_covered[window.to_covered_index])
+        var filterValue = window.to_covered[window.to_covered_index]
+        current_cluster_no = filterValue
+        if(filterValue == "*"){
+            filterValue = '.isotopeSelect'
+        }else{
+            filterValue = '.C' + filterValue;
+        }
+        filter(filterValue)
+        $('#uno').html(current_cluster_no)
+        $('#one').val(current_cluster_no)
+        window.to_covered_index += 1
+
+    })
+    
+    $("#openpass").click(function(){
+        $('one').attr('max',{{total_cluster_nums}})
+        current_cluster_no = int({{show_cluster_nums}})+1
+        if(filterValue == "*"){
+            filterValue = '.isotopeSelect'
+        }else{
+            filterValue = '.C' + filterValue;
+        }
+        filter(filterValue)
+        $('#uno').html(current_cluster_no)
+        $('#one').val(current_cluster_no)
+    })
+
+    //-----------------------------------Misleading标记组件------------------------------------STR
+     var markSuspects = function(){
+        if ($(this).hasClass('btn-default')){
+          console.log('marking as suspect')
+          $(this).removeClass('btn-default').addClass('btn-info')
+          var clusteraddress = 'C'+$(this).children(".info").attr('clusteraddress')+' RC'+$(this).children(".info").attr('realclusteraddress')
+          var clusterlinkIndex = window.location.href.lastIndexOf("\/")
+          var clusterlink = window.location.href.substring(0,clusterlinkIndex)+'/'+$(this).children(".info").attr('clusteraddress')
+          sotreinfo = '{{current_db}}'+' : '+$(this).children(".info").attr('iconaddr')+' | '+$(this).children(".info").attr('widget')
+          window.suspects += $(this).children(".info").attr('raw_id')+';'
+          var newSuspect =
+            {'download':'',
+             'appname':'',
+             'logoaddr':'',
+             'logo':'',
+             'appwebsite':$(this).children(".info").attr('appwebsite'),
+             'app':$(this).children(".info").attr('app'),
+             'iconaddr':$(this).children(".info").attr('iconaddr'),
+             'icon':'',
+             'clusteraddress':clusteraddress,
+             'clusterlink':clusterlink,
+             'appscreenshot':'',
+             'clusterscreenshot':'',
+             'api':$(this).children(".info").attr('api'),
+             'problem':$(this).attr('comment'),
+             'contact':'',
+             'storeinfo':sotreinfo,
+           }
+           console.log(newSuspect)
+           window.myWidgets.push(newSuspect)
+        }else{
+          console.log('marking as not suspect')
+          $(this).removeClass('btn-info').addClass('btn-default')
+          for(var i=0;i<window.myWidgets.length;i++){
+            if (window.myWidgets[i].app == $(this).children(".info").attr('app') && window.myWidgets[i].widget == $(this).children(".info").attr('widget')){
+              window.myWidgets.splice(i,1)
+            }
+          }
+        }
+    }
+
+      $('.markAsSuspect').click(markSuspects);
+
+    var funDownload = function (content, filename) {
+        var eleLink = document.createElement('a');
+        eleLink.download = filename;
+        eleLink.style.display = 'none';
+        // 字符内容转变成blob地址
+        var blob = new Blob([content]);
+
+        eleLink.href = URL.createObjectURL(blob);
+        console.log('eleLink.href',eleLink.href)
+        // 触发点击
+        document.body.appendChild(eleLink);
+        eleLink.click();
+        // 然后移除
+        document.body.removeChild(eleLink);
+    };
+   
+    function hoverAction(){
+         this.style.cursor = 'pointer';
+    }
+
+    $('#autoSuspects').hover(hoverAction);
+    $('#exportInfo').hover(hoverAction);
+    $('#clearSuspects').hover(hoverAction);
+
+    // 自动导出20%的异常控件
+    $('#autoSuspects').click(function(){
+      var fields = ['download','appname','logoaddr','logo','appwebsite','app','iconaddr','icon','clusteraddress',
+      'clusterlink','appscreenshot','clusterscreenshot','api','problem','contact','storeinfo'];
+      //首先遍历所有class=top20p的控件,然后将其加入列表中
+      top20p_suspects_list = new Array();
+      top20p_suspects = new String();
+      top20p_suspects_app = new Array();
+      $('.top20p').each(function(){
+          var clusteraddress = 'C'+$(this).children(".info").attr('clusteraddress')+' RC'+$(this).children(".info").attr('realclusteraddress')
+          var clusterlinkIndex = window.location.href.lastIndexOf("\/")
+          var clusterlink = window.location.href.substring(0,clusterlinkIndex)+'/'+$(this).children(".info").attr('clusteraddress')
+          sotreinfo = '{{current_db}}'+' : '+$(this).children(".info").attr('iconaddr')+' | '+$(this).children(".info").attr('widget')
+          top20p_suspects += $(this).children(".info").attr('raw_id')+';'
+          var newSuspect =
+            {'download':'',
+             'appname':'',
+             'logoaddr':'',
+             'logo':'',
+             'appwebsite':$(this).children(".info").attr('appwebsite'),
+             'app':$(this).children(".info").attr('app'),
+             'iconaddr':$(this).children(".info").attr('iconaddr'),
+             'icon':'',
+             'clusteraddress':clusteraddress,
+             'clusterlink':clusterlink,
+             'appscreenshot':'',
+             'clusterscreenshot':'',
+             'api':$(this).children(".info").attr('api'),
+             'problem':$(this).attr('comment'),
+             'contact':'',
+             'storeinfo':sotreinfo,
+           }
+           top20p_suspects_list.push(top20p_suspects)
+       });
+       // 进行数据库提交
+       console.log('#exportCSV: windows.suspects',top20p_suspects)
+       console.log('#exportCSV: windows.myWidgets',top20p_suspects_list)
+       for(item in top20p_suspects_list){
+         top20p_suspects_app += (top20p_suspects_list[item]['app']+';')
+       }
+       widgetMoewInfo = new Array()
+       $.ajax({
+               type: 'GET',
+               url: '/Console/submitSuspects',
+               data: {'suspects':top20p_suspects,'suspects_app':top20p_suspects_app,'submit':0},
+               dataType: 'json',
+               contentType: 'application/json; charset=UTF-8',
+               success: function(data) {
+                 widgetMoewInfo = data['data']
+                 console.log('in ajax: widgetMoewInfo',widgetMoewInfo)
+                 alert(data['msg']+' 已请求其他信息!')
+                 for(var i=0; i < top20p_suspects_list.length; i++){
+                   console.log('in for widgetMoewInfo',widgetMoewInfo)
+                   top20p_suspects_list[i]['logoaddr'] = widgetMoewInfo[i][0]
+                   top20p_suspects_list[i]['appname'] = widgetMoewInfo[i][1]
+                   top20p_suspects_list[i]['contact'] = widgetMoewInfo[i][2]
+                   top20p_suspects_list[i]['download'] = widgetMoewInfo[i][3]
+                 }
+                 var csv = json2csv({ data: top20p_suspects_list, fields: fields });
+                 funDownload(csv, 'autosuspects.csv');
+               } 
+       })
+    });
+    // 导出手动选中的异常控件
+    $('#exportCSV').click(function(){
+      var fields = ['download','appname','logoaddr','logo','appwebsite','app','iconaddr','icon','clusteraddress',
+      'clusterlink','appscreenshot','clusterscreenshot','api','problem','contact','storeinfo'];
+      // 进行数据库提交
+      console.log('#exportCSV: windows.suspects',window.suspects)
+      console.log('#exportCSV: windows.myWidgets',window.myWidgets)
+      suspects_app = ''
+      for(item in window.myWidgets){
+        suspects_app += (window.myWidgets[item]['app']+';')
+      }
+      widgetMoewInfo = new Array()
+      $.ajax({
+              type: 'GET',
+              url: '/Console/submitSuspects',
+              data: {'suspects':window.suspects,'suspects_app':suspects_app},
+              dataType: 'json',
+              contentType: 'application/json; charset=UTF-8',
+              success: function(data) {
+                widgetMoewInfo = data['data']
+                console.log('in ajax: widgetMoewInfo',widgetMoewInfo)
+                alert(data['msg']+' 已提交到数据库!')
+                for(var i=0; i < window.myWidgets.length; i++){
+                  console.log('in for widgetMoewInfo',widgetMoewInfo)
+                  window.myWidgets[i]['logoaddr'] = widgetMoewInfo[i][0]
+                  window.myWidgets[i]['appname'] = widgetMoewInfo[i][1]
+                  window.myWidgets[i]['contact'] = widgetMoewInfo[i][2]
+                  window.myWidgets[i]['download'] = widgetMoewInfo[i][3]
+                }
+                var csv = json2csv({ data: window.myWidgets, fields: fields });
+                funDownload(csv, 'test.csv');
+              } 
+      })
+    });
+    $('#exportInfo').click(function(){
+      var fields = ['app','iconaddr','icon','clusteraddress','clusterlink','api','problem','storeinfo'];
+      // 进行数据库提交
+      console.log('#exportInfo: windows.suspects',window.suspects)
+      console.log('#exportInfo: windows.myWidgets',window.myWidgets)
+      var csv = json2csv({ data: window.myWidgets, fields: fields });
+      funDownload(csv, 'info.csv');
+    });
+    $('#clearSuspects').click(function(){
+        $('.markAsSuspect').each(function(){
+          $(this).removeClass('btn-info').addClass('btn-default')
+        })
+        window.myWidgets = new Array();
+    });
+
+
+
+    //-----------------------------------Misleading标记组件------------------------------------END//
+
+    //-----------------------------------算法评价组件-----------------------------------------STR
+    // 目录: 改变misleading的红框显示;导出coverlist
+    function changeMisleadingDisplay(){
+        console.log('misleadingdisplay changed!')
+        var misleadingdisplay = $('#misleadingdisplay option:selected').val()
+        if(misleadingdisplay=='top1'){
+            console.log('misleadingdisplay top1 changed!')
+            /* can use to limit scope
+            $('.isotopeSelect').not('.totalhidden').each(function(){
+                console.log('######isotopeSelect:')
+            })
+            */
+            $('.imageinfo').each(function(){
+                if($(this).attr('sort') < 1){
+                    $(this).addClass('topoutlier')
+                }else{
+                    $(this).removeClass('topoutlier')
+                }
+            })
+        }
+        else if(misleadingdisplay=='top3'){
+            console.log('misleadingdisplay top3 changed!')
+            $('.imageinfo').each(function(){
+                if($(this).attr('sort') < 3){
+                    $(this).addClass('topoutlier')
+                }else{
+                    $(this).removeClass('topoutlier')
+                }
+            })
+        }
+        else if(misleadingdisplay=='top5'){
+            console.log('misleadingdisplay top5 changed!')
+            $('.imageinfo').each(function(){
+                if($(this).attr('sort') < 5){
+                    $(this).addClass('topoutlier')
+                }else{
+                    $(this).removeClass('topoutlier')
+                }
+            })
+        }
+        else if(misleadingdisplay=='top20p'){
+            console.log('misleadingdisplay top20p changed!')
+            $('.imageinfo').each(function(){
+                if($(this).attr('percent_sort') <= 0.2){
+                    $(this).addClass('topoutlier')
+                }else{
+                    $(this).removeClass('topoutlier')
+                }
+            })
+        }
+        else{
+            console.log('misleadingdisplay threshold changed!')
+            // 弹出对话框，获取自定义阈值
+            // 如果是排序xx
+            // 如果是分数xx
+            threshold=prompt("输入自定义阈值:若为排序序号阈值以S开头，如S<5;若为异常分数阈值以O开头，如O>=0.55;","O>=0.55"); 
+            threshold_type = threshold.substr(0,1)
+            if(threshold.indexOf('=') >= 0){
+                threshold_operator = threshold.substr(1,2)
+                threshold_value = threshold.substr(3)
+            }else{
+                threshold_operator = threshold.substr(1,1)
+                threshold_value = threshold.substr(2)
+            }
+            console.log(threshold_type,threshold_operator,threshold_value)
+            if( threshold_type == 'S'){
+                threshold_value = parseInt(threshold_value)
+                $('.imageinfo').each(function(){
+                    current_value = parseInt($(this).attr('sort')) 
+                    if(threshold_operator == '>')
+                        expression = current_value > threshold_value
+                    else if(threshold_operator == '<=')
+                        expression = current_value <= threshold_value
+                    else if(threshold_operator == '>=')
+                        expression = current_value >= threshold_value
+                    else
+                        expression = current_value < threshold_value //default <
+                    if(expression){
+                        $(this).addClass('topoutlier')
+                    }else{
+                        $(this).removeClass('topoutlier')
+                    }
+                })
+            
+            }else if (threshold_type == 'O'){
+                threshold_value = parseFloat(threshold_value)
+                $('.imageinfo').each(function(){
+                    current_value = -parseFloat($(this).attr('score')) 
+                    if(threshold_operator == '>')
+                        expression = current_value > threshold_value
+                    else if(threshold_operator == '<=')
+                        expression = current_value <= threshold_value
+                    else if(threshold_operator == '>=')
+                        expression = current_value >= threshold_value
+                    else
+                        expression = current_value < threshold_value //default 
+                    if(expression){
+                        $(this).addClass('topoutlier')
+                    }else{
+                        $(this).removeClass('topoutlier')
+                    }
+                })
+            
+            }
+
+
+        }
+    }
+    $('#misleadingdisplay').change(changeMisleadingDisplay);
+    
+    //-----------------------------------易用性组件--------------------------------------------STR
+    // 目录: 键盘快捷键;控件颜色区分;
+    $(document).keyup(function(e){
+        //https://blog.csdn.net/weixin_44538469/article/details/91356940
+         switch(e.which) { 
+             //s S
+             case 83:    $('#searchFilter').focus(); 
+                         break;   
+             // Enter
+             case 13:    search_action(); 
+                         break;   
+             // left
+             case 37:    before_action(); 
+                         break;   
+             // right
+             case 39:    next_action(); 
+                         break;   
+             // 1
+             case 49:    $('#misleadingdisplay').val('top1'); 
+                         //$('#misleadingdisplay').children('option').text('Top 1'); 
+                         changeMisleadingDisplay();
+                         break; 
+             // 3
+             case 51:   $('#misleadingdisplay').val('top3');
+                        //$('#misleadingdisplay').children('option').text('Top 3');
+                         changeMisleadingDisplay();
+                         break;   
+             // 5
+             case 53:    $('#misleadingdisplay').val('top5'); 
+                        //$('#misleadingdisplay').children('option').text('Top 5');
+                         changeMisleadingDisplay();
+                         break;   
+             // 2
+             case 50:    $('#misleadingdisplay').val('top20p'); 
+                        //$('#misleadingdisplay').children('option').text('Top 20%');
+                         changeMisleadingDisplay();
+                         break;   
+             // t
+             case 84:   $('#misleadingdisplay').val('threshold');
+                        //$('#misleadingdisplay').children('option').text('Threshold');
+                         changeMisleadingDisplay();
+                         break;   
+        }
+     })
+
+     $('#taggleDisplayDetected').click(function(){
+        $('.detected').each(function(){
+            $(this).removeClass('detected').addClass('detected_nodisplay')
+        })
+        $('.detected_nodisplay').each(function(){
+            $(this).removeClass('detected_nodisplay').addClass('detected_nodisplay')
+        })
+     })
+
+     $('#taggleDisplayGlobal20p').click(function(){
+        $('.imageinfo').each(function(){
+            if ($(this).attr('global_outlier_sort_ratio') <= 0.2 ){
+                $(this).addClass('detected') 
+            }
+        })
+        $('.detected').each(function(){
+            $(this).removeClass('detected').addClass('detected_nodisplay')
+        })
+     })
+    }); //JQUERY END
+	</script>
+	<script src="{{staticPath}}/js/html5slider.js"></script>
+</body>
+
+</html>

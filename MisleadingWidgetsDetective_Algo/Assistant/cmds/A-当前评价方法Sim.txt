@@ -1,0 +1,55 @@
+#[实验A:当前评价方法Sim]
+#项目:UniversalSet_forforlimn_EvalCluster
+#子任务:
+#运行命令:python Assistant/Interpreter.py /home/dl/users/wangruifeng/05MisleadingWidgets/androidwidgetclustering/Assistant/cmds/A-当前评价方法Sim.txt
+
+######################### 1.选择本次的数据库
+A cb db_universal_set
+A cf forforlimn
+#-------------------------------------------------------------------
+
+######################### 2'.打开项目
+#A o UniversalSet_forforlimn_EvalCluster.rawapi_raw_sim_hog_if--m使用hog提取[实验:当前评价方法Sim]
+
+######################### 6.DE
+#DE mvector
+
+######################### 7.VC
+#VC sim
+
+######################### 5.IF
+#IF extif hog
+
+######################### 8.OD
+#OD run
+
+#-------------------------------------------------------------------
+######################### 2.打开项目
+A o UniversalSet_forforlimn_EvalCluster.rawapi_raw_sim_vgg_if--m使用vgg提取[实验:当前评价方法Sim]
+
+######################### 3.DP
+# 已经提前处理过
+# 记得将数据集换成原始的[ok]
+
+######################### 4.DT
+#DT run
+
+######################### 7.VC
+VC sim
+
+######################### 5.IF
+#IF extif cnn-vgg
+
+######################### 8.OD
+OD run
+
+#-------------------------------------------------------------------
+######################### 2'.打开项目
+A o UniversalSet_forforlimn_EvalCluster.rawapi_raw_sim_spm_if--m使用spm提取[实验:当前评价方法Sim]
+
+######################### 5.IF
+#IF extif spm
+
+######################### 8.OD
+OD run
+
